@@ -4,13 +4,13 @@ We will start by evaluating the sequence quality of the raw reads which are prov
 ## FastQC on raw reads
 FastQC performs quality control checks on raw sequence data and can give a quick impression of your data before doing further analysis. We'll also use MultiQC which summarises the FASTQC output from multiple samples.
 
-1. From your working directory, make a folder for read quality control.
+### 1. From your working directory, make a folder for read quality control.
 ```
 mkdir -p 01_ReadQC/fastqc_pass1
 #the -p flag makes the parent directory if it does not already exist
 ```
 
-2. Run FastQC
+### 2. Run FastQC
 
 We can run fastqc on all of our samples using a for loop.
 
@@ -44,7 +44,7 @@ We'll now perform quality filtering on the reads using [fastp](https://github.co
 * PolyG tail trimming is enabled by default for NextSeq/NovaSeq data which is auto-detected 
 * PCR duplicate removal is disabled by default 
 
-1. From your working directory, make a folder for the QC reads and fastp output
+### 3. From your working directory, make a folder for the QC reads and fastp output
 
 ```
 #make a directory for QC reads
@@ -53,7 +53,7 @@ mkdir 01_ReadQC/fastp_reads
 #make a directory for the fastp report
 mkdir 01_ReadQC/fastp_report
 ```
-2. Run fastp
+### 4. Run fastp
 
 We'll use a for loop again to run fastp on all of our samples.
 
@@ -74,12 +74,12 @@ done
 ## FastQC on quality filtered reads
 Now we've done quality control on our reads, we'll do a second pass with FastQC.
 
-1. From your working directory, make a folder for the FastQC results
+### 5. From your working directory, make a folder for the FastQC results
 ```
 mkdir 01_ReadQC/fastqc_pass2
 ```
 
-2. Run FastQC and MultiQC on the QC reads
+### 6. Run FastQC and MultiQC on the QC reads
 We can use the same commands we used earlier, now on the quality-controlled reads.  
 
 ```

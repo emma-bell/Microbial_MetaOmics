@@ -3,7 +3,7 @@
 Now we have our contigs (.fasta) and our alignments (.sorted.bam) we can move onto binning.
 We're going to use two assemblers, [CONCOCT](https://github.com/BinPro/CONCOCT) and [MetaBAT2](https://bitbucket.org/berkeleylab/metabat/src/master/).
 
-1. Let's start by making the directories we'll need for the output.
+### 1. Let's start by making the directories we'll need for the output.
 ```
 mkdir -p 04_Binning/concoct
 mkdir 04_Binning/metabat
@@ -13,7 +13,7 @@ mkdir 04_Binning/metabat
 CONCOCT usually takes longer to run than MetaBAT2, so let's start with that one.
 You'll also need a directory for each of your samples inside the **`04_Binning/concoct`** directory.
 
-2. Running CONCOCT
+### 2. Running CONCOCT
 ```
 #First the contigs are cut up into 10000 bp
 
@@ -59,7 +59,7 @@ Perform the above renaming step on each of your samples.
 ## MetaBAT2
 We're now ready to do binning with MetaBAT2. You should repeat this step for each of your samples.
 
-3. Running MetaBAT2
+### 3. Running MetaBAT2
 
 ```
 #First make a coverage file using our alignments
@@ -86,7 +86,7 @@ We want to know how complete our bins are and whether they contain any contamina
 
 We'll use the "predict" module of CheckM2 to get the completeness and contamination of both our CONCOCT and MetaBAT2 bins.
 
-4. Running CheckM2
+### 4. Running CheckM2
 ```
 #CheckM2 on CONCOCT bins
 
@@ -115,7 +115,7 @@ Repeat the above filtering for each of your CheckM2 outputs. The file **`quality
 
 We can optionally use CheckM with the following instructions.
 
-5. Running CheckM
+### 5. Running CheckM
 ```
 #CheckM on CONCOCT bins
 
@@ -142,7 +142,7 @@ Repeat the above filtering for each of your CheckM outputs. The file **`your_sam
 
 ## Bin refinement with DAS Tool
 
-6. Performing bin refinement 
+### 6. Performing bin refinement 
 
 Before we can run [DAS Tool](https://github.com/cmks/DAS_Tool) we need to prepare the input files. Let's start by making a directory for the results.
 

@@ -7,7 +7,7 @@ First, lets make a directory for our alignments and for each of our samples.
 
 `mkdir -p 03_Mapping/your_sample_name`
 
-1. Perform mapping with Strobealign
+### 1. Perform mapping with Strobealign
 
 This time we'll use a for loop to iterate through each set of paired QC reads. We'll run this command for each of our samples. Make sure you change the parts of the command that say *`your_sample`* to your sample name.
 
@@ -27,7 +27,7 @@ done
 
 You should now have a directory in **`03_Mapping`** for each of your samples. In each sample directory there should be the same number of **`.bam`** (binary alignment) and **`.bam.bai`** (indexed alignment) files as you have samples. We'll need each of these files for binning.
 
-2. Check the proportion of reads that aligned to our assembly.
+### 2. Check the proportion of reads that aligned to our assembly.
 
 We can use samtools to check the proportion of reads that mapped to our contigs.
 
