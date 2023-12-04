@@ -2,7 +2,7 @@
 We will start by evaluating the sequence quality of the raw reads which are provided in zipped fastq files (extension .fastq.gz).
 
 ## FastQC on raw reads
-FastQC performs quality control checks on raw sequence data and can give a quick impression of your data before doing further analysis. We'll also use MultiQC which summarises the FASTQC output from multiple samples.
+[FastQC](https://anaconda.org/bioconda/fastqc) performs quality control checks on raw sequence data and can give a quick impression of your data before doing further analysis. We'll also use [MultiQC](https://anaconda.org/bioconda/multiqc) which summarises the FASTQC output from multiple samples.
 
 ### 1. From your working directory, make a folder for read quality control.
 ```

@@ -6,9 +6,14 @@ In the hands-on part of this course, we'll learn how to go from raw Illumina sho
 
 This course is for beginners in microbial meta-omics and there are no prerequisites. However, basic unix skills will be beneficial. If you are not familiar with unix I recommend running through [this resource](https://astrobiomike.github.io/unix/unix-intro) before the class.
 
-# Bioinformatics tools
 
-To be able to participate, you will need a SCITAS account and be able to connect via SSH following [these instructions](https://scitas-doc.epfl.ch/user-guide/using-clusters/connecting-to-the-clusters/). You will need to work with csv/tsv files. We recommend [R/RStudio](https://posit.co/download/rstudio-desktop/) but you can work with Excel.
+To be able to participate
+* You will need a SCITAS account and be able to connect via SSH following [these instructions](https://scitas-doc.epfl.ch/user-guide/using-clusters/connecting-to-the-clusters/). 
+* You will need to install [R/RStudio](https://posit.co/download/rstudio-desktop/) on your laptop.
+
+# Bioinformatics tools
+## Installed on your laptop
+* [R/RStudio](https://posit.co/download/rstudio-desktop/)
 
 ## Tools we'll use that are installed on SCITAS
 * [FastQC](https://anaconda.org/bioconda/fastqc)

@@ -107,7 +107,7 @@ The file **`checkm2/quality_report.tsv`** contains our results. You should have 
 awk -F "\t" '$2 >=50 && $3 <=10' quality_report.tsv > quality_report_filtered.tsv
 ```
 
-Repeat the above filtering for each of your CheckM2 outputs. The file **`quality_report_filtered`** now contains a list of our bins that pass quality filtering. There should be two for each of your samples.
+Repeat the above filtering for each of your CheckM2 outputs. The file **`quality_report_filtered.tsv`** now contains a list of our bins that pass quality filtering. There should be two for each of your samples.
 
 **Q: How many bins from CONCOCT compared to MetaBAT2 passed the filtering step?**
 
