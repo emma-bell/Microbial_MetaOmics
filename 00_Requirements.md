@@ -8,12 +8,30 @@ This course is for beginners in microbial meta-omics and there are no prerequisi
 
 
 To be able to participate
-* You will need a SCITAS account and be able to connect via SSH following [these instructions](https://scitas-doc.epfl.ch/user-guide/using-clusters/connecting-to-the-clusters/). 
-* You will need to install [R/RStudio](https://posit.co/download/rstudio-desktop/) on your laptop.
+* You will need a SCITAS account and be able to connect via SSH following [these instructions](https://scitas-doc.epfl.ch/user-guide/using-clusters/connecting-to-the-clusters/).
+* You will need to install the below tools on your laptop.
 
 # Bioinformatics tools
 ## Installed on your laptop
 * [R/RStudio](https://posit.co/download/rstudio-desktop/)
+* [DADA2](https://benjjneb.github.io/dada2/index.html)
+
+    To install Dada2 open RStudio and run the following command in the console window.
+    ```
+    if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+    BiocManager::install("dada2")
+    ```
+
+    Check the installation by loading Dada2:
+    ```
+    library(dada2)
+    ```
+    And checking which version is installed:
+    ```
+    packageVersion("dada2")
+    ```
+* [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/)
 
 ## Tools we'll use that are installed on SCITAS
 * [FastQC](https://anaconda.org/bioconda/fastqc)
