@@ -31,6 +31,11 @@ To be able to participate
     ```
     packageVersion("dada2")
     ```
+* [ampvis2](https://kasperskytte.github.io/ampvis2/)
+    ```
+    install.packages("remotes")
+    remotes::install_github("kasperskytte/ampvis2")
+    ```
 * [Miniconda](https://docs.conda.io/projects/miniconda/en/latest/)
 
 ## Tools we'll use that are installed on SCITAS
