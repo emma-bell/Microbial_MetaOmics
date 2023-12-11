@@ -214,32 +214,48 @@ We'll follow the steps from [this tutorial](https://astrobiomike.github.io/ampli
 
 Change sequence headers to ASV_1, ASV_2...
 ```
+#Extract column names (ASV sequences) from 'seqtab.nochim'
 asv_seqs <- colnames(seqtab.nochim)
+
+#Create a vector 'asv_headers' storing the name of each ASV
 asv_headers <- vector(dim(seqtab.nochim)[2], mode="character")
 
+#Iterate over each column (ASV) in 'seqtab.nochim' and generate a header for each ASV in the format ">ASV_i"
 for (i in 1:dim(seqtab.nochim)[2]) {
     asv_headers[i] <- paste(">ASV", i, sep="_")
 }
 ```
-Make and write out a fasta of our ASV sequences:
+
+Make and write out a fasta of our ASV sequences by combining 'asv_headers' and 'asv_seqs':
 ```
 asv_fasta <- c(rbind(asv_headers, asv_seqs))
 write(asv_fasta, "ASVs.fa")
 ```
 Make and write out a counts table:
 ```
+#'seqtab.nochim' is a table containing our sequence data
+#'asv_headers' is a vector of header information associated with each sequence
+
+#Transpose (t) the sequence table to make rows correspond to ASVs and columns to samples
+
 asv_tab <- t(seqtab.nochim)
+
+#Remove the ">" character from the beginning of each row name
 row.names(asv_tab) <- sub(">", "", asv_headers)
 
+#Iterate over each column (sample) in the ASV table and remove the "_R1_filt.fastq.gz" suffix
 for (col in 1:ncol(asv_tab)){
     colnames(asv_tab)[col] <-  sub("_R1_filt.fastq.gz", "", colnames(asv_tab)[col])
 }
 
+#Write the ASV table to a tab-separated values (tsv) file
 write.table(asv_tab, "ASVs_counts.tsv", sep="\t", quote=F, col.names=NA)
 ```
 Make and write out a taxonomy table:
 ```
 asv_tax <- taxa
+
+#Remove the ">" character from the beginning of each row name in 'asv_tax'
 row.names(asv_tax) <- sub(">", "", asv_headers)
 
 write.table(asv_tax, "ASVs_taxonomy.tsv", sep="\t", quote=F, col.names=NA)
