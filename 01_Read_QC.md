@@ -76,7 +76,7 @@ for sample in $(cat samples.txt)
 do
 
 fastp -i 00_raw/${sample}_R1.fastq.gz -I 00_raw/${sample}_R2.fastq.gz -o 01_ReadQC/fastp_reads/${sample}_R1.fastq.gz -O 01_ReadQC/fastp_reads/${sample}_R2.fastq.gz \
---detect_adapter_for_pe --qualified_quality_phred 20 --trim_tail=1 \
+--detect_adapter_for_pe --qualified_quality_phred 20 --trim_tail=1 --trim_tail2=1 \
 -h 01_ReadQC/fastp_report/${sample}.fastp.html -j 01_ReadQC/fastp_report/${sample}.fastp.json
 
 done
