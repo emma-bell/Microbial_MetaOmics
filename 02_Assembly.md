@@ -175,8 +175,8 @@ for sample in $(cat samples.txt)
 
 do
 
-reformat.sh in=02_Assembly/your_assembly_method/${sample}/your_contigs_file.fa \
-out=02_Assembly/filtered_contigs/${sample}_contigs.fa minlength=your_chosen_threshold
+reformat.sh in=02_Assembly/your_assembly_method/${sample}/contigs.fasta \
+out=02_Assembly/filtered_contigs/${sample}_contigs.fasta minlength=500
 
 done
 ```
