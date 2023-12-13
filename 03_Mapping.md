@@ -41,7 +41,7 @@ done
 * `-t 20` Specifies the number of threads for parallel processing.
 * `samtools index` Creates an index for the sorted BAM file using
 
-Again, you'll need to create an sbatch script to submit this job. The image should be `strobealign.sif` and your script should be `03_strobealign.sh`
+Again, you'll need to create an sbatch script to submit this job. The image should be `samtools-strobealign.sif` and your script should be `03_strobealign.sh`
 
 We are being liberal with 10 hours to make sure it will finish but it will likely take less time.
 ```
