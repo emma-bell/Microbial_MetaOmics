@@ -130,7 +130,13 @@ In your script:
 #!/bin/bash
 cd /data
 
-cat 02_Assembly/metaspades/your_sample/contigs.fa | seqkit seq | seqkit stats > 02_Assembly/metaspades/your_sample/stats.txt
+for sample in $(cat samples.txt)
+
+do
+
+cat 02_Assembly/metaspades/${sample}/contigs.fa | seqkit seq | seqkit stats > 02_Assembly/metaspades/${sample}/${sample}_stats.txt
+
+done
 ```
 * `cat` is reading the contig file. The pipe `|` then passes the output into the seqkit command which will reads the sequences and give you some stats.
 
