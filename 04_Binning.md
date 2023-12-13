@@ -290,11 +290,11 @@ When your Das Tool run has finished, you should have a file **`04_Binning/dastoo
 Now let's do CheckM2 on our refined bins to get some quality measures.
 
 # Bin QC
-We want to know how complete our bins are and whether they contain any contamination. To do this we're going to use [CheckM2](https://github.com/chklovski/CheckM2). We'll also run [CheckM](https://github.com/Ecogenomics/CheckM) on one sample just to compare.
+We want to know how complete our bins are and whether they contain any contamination. To do this we're going to use [CheckM2](https://github.com/chklovski/CheckM2). We'll also run [CheckM](https://github.com/Ecogenomics/CheckM) to compare.
 
 ## CheckM2
 
-We'll use the "predict" module of CheckM2 to get the completeness and contamination of both our CONCOCT and MetaBAT2 bins.
+We'll use the "predict" module of CheckM2 to get the completeness and contamination of our Das Tool bins.
 
 ### 4. Running CheckM2
 
@@ -336,7 +336,7 @@ Create an sbatch script to submit the job.
 The file **`04_Binning/checkm2/${sample}/quality_report.tsv`** contains your results. You should have one for each sample and each binning method. We can select the bins that pass our minimum completeness (50%) and maximum contamination (10%) thresholds with an `awk` command.
 
 ```
-nano 04_filter_checkm_table.sh
+nano 04_filter_checkm2_table.sh
 ```
 
 ```
@@ -356,7 +356,7 @@ done
 * How did I know which columns to select?
 `head 04_Binning/checkm2/${sample}/quality_report.tsv `
 
-This will only take a few seconds to run so you can execute it directly in terminal with `bash 04_filter_checkm_table.sh`
+This will only take a few seconds to run so you can execute it directly in terminal with `bash 04_filter_checkm2_table.sh`
 
 Let's download these files to our laptops. In a new terminal window on your laptop:
 
@@ -415,12 +415,24 @@ CheckM takes a bit longer to run than CheckM2 so in your sbatch script you can u
 The file **`04_Binning/checkm1/${sample}_checkm.tsv`** contains our results. We can select the bins that pass our minimum completeness (50%) and maximum contamination (10%) levels with the same `awk` command adjusted for the appropriate columns (the columns of the output file from CheckM are in a different order to CheckM2).
 
 ```
-#!/bin/bash
-
-awk -F "\t" '$12 >=50 && $13 <=10' 04_Binning/checkm1/${sample}_checkm.tsv > 04_Binning/checkm1/${sample}/${sample}_checkm_filtered.tsv
+nano 04_filter_checkm1_table.sh
 ```
 
-You can download a copy of these files to your laptop with the `scp` command.
+```
+#!/bin/bash
+
+for sample in $(cat samples.txt)
+
+do
+
+awk -F "\t" '$12 >=50 && $13 <=10' 04_Binning/checkm1/${sample}_checkm.tsv > 04_Binning/checkm1/${sample}/${sample}_checkm_filtered.tsv
+
+done
+```
+`awk` commands are super quick, so you can execute directly in terminal with `bash 04_filter_checkm1_table.sh`
+
+
+And download a copy of these files to your laptop with the `scp` command.
 ```
 scp 'username@jed.epfl.ch:/scratch/username/your_dataset/04_binning/checkm1/*_checkm_filtered.tsv' .
 ```
