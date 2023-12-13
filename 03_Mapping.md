@@ -19,7 +19,7 @@ nano 03_strobealign.sh
 
 ```
 #!/bin/bash
-/data
+cd /data
 
 #set the sample variable
 sample=your_sample
@@ -67,7 +67,7 @@ nano 03_samtools.sh
 
 ```
 #!/bin/bash
-/data
+cd /data
 
 for sample in $(cat samples.txt)
 

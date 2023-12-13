@@ -128,7 +128,7 @@ nano 02_seqkit.sh
 In your script:
 ```
 #!/bin/bash
-/data
+cd /data
 
 cat 02_Assembly/metaspades/your_sample/contigs.fa | seqkit seq | seqkit stats
 ```
@@ -163,7 +163,7 @@ nano 02_bbtools.sh
 ```
 #!/bin/bash
 
-/data
+cd /data
 
 for sample in $(cat samples.txt)
 
