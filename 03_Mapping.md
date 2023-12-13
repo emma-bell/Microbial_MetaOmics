@@ -29,7 +29,7 @@ for reads in $(cat samples.txt)
 do
 
 strobealign 02_Assembly/filtered_contigs/${sample}_contigs.fa \
-01_ReadQC/readsqc/${reads}_R1.fq.gz 01_ReadQC/readsqc/${reads}_R2.fq.gz \
+01_ReadQC/fastp_reads/${reads}_R1.fq.gz 01_ReadQC/fastp_reads/${reads}_R2.fq.gz \
 -t 20 | samtools sort -o 03_Mapping/${sample}/${reads}.sorted.bam
 
 samtools index 03_Mapping/${sample}/${reads}.sorted.bam
