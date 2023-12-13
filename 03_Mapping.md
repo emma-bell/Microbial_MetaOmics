@@ -78,14 +78,13 @@ samtools flagstat 03_Mapping/${sample}/${sample}.sorted.bam -O tsv > 03_Mapping/
 done
 ```
 
-Create an sbatch script to submit the job.
-
+This command shouldn't take long and you can use the same image `samtools-strobealign.sif`, just change the name of your script to `03_samtools.sh`:
 ```
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
-#SBATCH --cpus-per-task 10
-#SBATCH --time 02:00:00
-#SBATCH --mem=70G
+#SBATCH --cpus-per-task 5
+#SBATCH --time 2:00:00
+#SBATCH --mem=35G
 ```
 
 You can view the proportion of mapped reads by typing `more 03_Mapping/your_sample/your_sample_stats.tsv`. "Mapped" shows the count as a percentage of the total number of QC-passed or QC-failed reads after the category name e.g.,
@@ -96,4 +95,12 @@ You can view the proportion of mapped reads by typing `more 03_Mapping/your_samp
 83.33%      N/A primary mapped %
 ```
 
+If you want a copy of these stats you can download them (make sure you are in a new terminal window not logged in to the server):
+
+```
+scp 'username@jed.epfl.ch:/scratch/username/your_dataset/03_Mapping/your_sample/*stats.tsv' .
+```
+
 **Q: What proportion of your reads were mapped to your assembly? Do you consider that "good"?**
+
+You do not need to wait for this to finish before you move onto binning.
