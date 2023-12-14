@@ -88,8 +88,6 @@ perl METABOLIC-G.pl -in 04_Binning/checkm2/${sample}/protein_files/ -o 05_Annota
 done
 ```
 
-METABOLIC will take some time to run, so we can move on to the next steps whilst we are waiting for it to complete.
-
 ```
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
@@ -97,4 +95,6 @@ METABOLIC will take some time to run, so we can move on to the next steps whilst
 #SBATCH --time 10:00:00
 #SBATCH --mem=140G
 ```
+
+METABOLIC will take some time to run, so we can move on to the next steps whilst we are waiting for it to complete.
 

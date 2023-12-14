@@ -27,7 +27,7 @@ nano 04_concoct.sh
 
 ```
 #!/bin/bash
-/data
+cd /data
 
 for sample in $(cat samples.txt)
 
@@ -356,7 +356,7 @@ done
 * How did I know which columns to select?
 `head 04_Binning/checkm2/${sample}/quality_report.tsv `
 
-This will only take a few seconds to run so you can execute it directly in terminal with `bash 04_filter_checkm2_table.sh`
+This will only take a few seconds to run so you can execute it directly in terminal with `bash 04_filter_checkm_table.sh`
 
 Let's download these files to our laptops. In a new terminal window on your laptop:
 
