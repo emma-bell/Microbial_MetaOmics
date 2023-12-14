@@ -39,11 +39,11 @@ cut_up_fasta.py 02_Assembly/filtered_contigs/${sample}_contigs.fa -c 10000 -o 0 
 
 #Then a coverage table is made using our alignments
 
-concoct_coverage_table.py 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed 03_Mapping/${sample}/*.sorted.bam > 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv
+concoct_coverage_table.py 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed 03_Mapping/${sample}/*.sorted.bam --threads > 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv
 
 #Now we're ready to run CONCOCT
 
-concoct --composition_file 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa --coverage_file 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv -b 04_Binning/concoct/${sample}/${sample}
+concoct --composition_file --threads $SLURM_CPUS_PER_TASK 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa --coverage_file 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv -b 04_Binning/concoct/${sample}/${sample}
 
 #Merge subcontig clustering into original contig clustering
 
