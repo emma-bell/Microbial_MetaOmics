@@ -16,7 +16,7 @@ You'll also need a directory for each of your samples inside the **`04_Binning/c
 We'll do that with a quick loop that you can type and run directly in the terminal window:
 
 ```
-for sample in $(cat samples.txt); do mkdir 04_Binning/${sample}; done
+for sample in $(cat samples.txt); do mkdir 04_Binning/concoct/${sample}; done
 ```
 
 ### 2. Running CONCOCT
