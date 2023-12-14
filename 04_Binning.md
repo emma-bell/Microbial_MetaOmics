@@ -121,7 +121,7 @@ for sample in $(cat samples.txt)
 
 do
 
-        for bin in 04_Binningg/concoct/${sample}/bins_fasta/*.fa
+        for bin in 04_Binning/concoct/${sample}/bins_fasta/*.fa
 
         do
 
@@ -169,7 +169,7 @@ for sample in $(cat samples.txt)
 
 do
 
-        for bin in 04_Binningg/concoct/${sample}/bins_fasta/*.fa
+        for bin in 04_Binning/concoct/${sample}/bins_fasta/*.fa
 
         do
 
