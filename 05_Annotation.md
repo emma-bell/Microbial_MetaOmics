@@ -22,6 +22,8 @@ for sample in $(cat samples.txt)
 do
 
 gtdbtk classify_wf --genome_dir 04_Binning/dastool/${sample}/${sample}_DASTool_bins -x fa --out_dir 05_Annotation/gtdb/${sample} --mash_db 05_Annotation/gtdb/${sample} --prefix ${sample} --cpus 20
+
+done
 ```
 
 Then create a sbatch script:

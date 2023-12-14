@@ -441,7 +441,7 @@ scp 'username@jed.epfl.ch:/scratch/username/your_dataset/04_binning/checkm1/*_ch
 
 #CONCOCT test
 ```
-!/bin/bash
+#!/bin/bash
 cd /data
 
 sample=KR46_May
