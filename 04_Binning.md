@@ -438,3 +438,23 @@ scp 'username@jed.epfl.ch:/scratch/username/your_dataset/04_binning/checkm1/*_ch
 ```
 
 **Q: Do you see any differences between the CheckM2 and CheckM results?**
+
+#CONCOCT test
+```
+!/bin/bash
+cd /data
+
+sample=KR46_May
+
+cut_up_fasta.py 02_Assembly/filtered_contigs/${sample}_contigs.fa -c 10000 -o 0 --merge_last -b 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed > 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa
+
+concoct_coverage_table.py 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed 03_Mapping/${sample}/*.sorted.bam > 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv
+
+concoct --composition_file 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa --coverage_file 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv -b 04_Binning/concoct/${sample}/${sample}
+
+merge_cutup_clustering.py 04_Binning/concoct/${sample}/${sample}_clustering_gt1000.csv > 04_Binning/concoct/${sample}/${sample}_clustering_merged.csv
+
+mkdir 04_Binning/concoct/${sample}/bins_fasta
+
+extract_fasta_bins.py 02_Assembly/filtered_contigs/${sample}_contigs.fa 04_Binning/concoct/${sample}/${sample}_clustering_merged.csv --output_path 04_Binning/concoct/${sample}/bins_fasta
+```
