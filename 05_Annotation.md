@@ -21,7 +21,7 @@ for sample in $(cat samples.txt)
 
 do
 
-gtdbtk classify_wf --genome_dir 04_Binning/dastool/${sample}/${sample}_DASTool_bins -x fa --out_dir 05_Annotation/gtdb/${sample} --mash_db 05_Annotation/gtdb/${sample} --prefix ${sample} --cpus 20
+gtdbtk classify_wf --genome_dir 04_Binning/dastool/${sample}/${sample}_DASTool_bins -x fa --out_dir 05_Annotation/gtdb/${sample} --mash_db 05_Annotation/gtdb/${sample} --prefix ${sample} --cpus $SLURM_CPUS_PER_TASK
 
 done
 ```
@@ -85,7 +85,7 @@ for sample in $(cat samples.txt)
 
 do
 
-perl METABOLIC-G.pl -in 04_Binning/checkm2/${sample}/protein_files/ -o 05_Annotation/metabolic/${sample}
+perl METABOLIC-G.pl -in 04_Binning/checkm2/${sample}/protein_files/ -o 05_Annotation/metabolic/${sample} -t $SLURM_CPUS_PER_TASK
 
 done
 ```

@@ -17,8 +17,15 @@ nano 06_prepare_for_drep.sh
 ```
 #!/bin/bash
 
-# Concatenate all *filtered.tsv files from checkm2 into a single temporary file
-cat 04_Binning/checkm2/*/*filtered.tsv > 06_Representative_MAGs/drep/checkm2.tmp
+# Concatenate all checkm2 quality reports into a single temporary file
+
+for sample in $(cat samples.txt)
+
+do
+
+cat 04_Binning/checkm2/${sample}/quality_report.tsv | tail -n+2 >> 06_Representative_MAGs/drep/checkm2.tmp
+
+done
 
 # Extract columns 1 (sample name), 2 (completeness), and 3 (contamination) from the concatenated file, add ".fa," to the sample names, and redirect to a temporary file
 awk '{print $1, $2, $3}' OFS="," 06_Representative_MAGs/drep/checkm2.tmp | sed 's/,/.fa,/' > 06_Representative_MAGs/drep/checkm2_for_drep.tmp
@@ -128,15 +135,19 @@ for sample in $(cat samples.txt)
 
 do
 
-strobealign 06_Representative_MAGs/MAGdb.fa 01_ReadsQC/fastp_reads/metagenomes/${sample}_R1.fastq.gz 01_ReadsQC/fastp_reads/${sample}_R2.fastq.gz -U -t 18 \
+strobealign 06_Representative_MAGs/MAGdb.fa 01_ReadQC/fastp_reads/${sample}_R1.fastq.gz 01_ReadQC/fastp_reads/${sample}_R2.fastq.gz -U -t $SLURM_CPUS_PER_TASK \
 | samtools sort -o 06_Representative_MAGs/reads_to_mags/${sample}.sorted.bam
 
-samtools index ${sample}.sorted.bam
+samtools index 06_Representative_MAGs/reads_to_mags/${sample}.sorted.bam
 
 done
 ```
 
 Next we'll run CoverM to calculate the abundance of our MAGs
+
+```
+mkdir 06_Representative_MAGs/coverm
+```
 
 ```
 #!/bin/bash

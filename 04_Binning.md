@@ -267,7 +267,7 @@ for sample in $(cat samples.txt)
 
 do
 
-DAS_Tool -i 04_Binning/dastool/${sample}.concoct.contigs2bin.tsv,04_Binning/dastool/${sample}.metabat.contigs2bin.tsv -l concoct,metabat -c 02_Assembly/filtered_contigs/${sample}.contigs.fa -o 04_Binning/dastool/${sample}/${sample} --write_bins --threads 20
+DAS_Tool -i 04_Binning/dastool/${sample}.concoct.contigs2bin.tsv,04_Binning/dastool/${sample}.metabat.contigs2bin.tsv -l concoct,metabat -c 02_Assembly/filtered_contigs/${sample}.contigs.fa -o 04_Binning/dastool/${sample}/${sample} --write_bins --threads $SLURM_CPUS_PER_TASK
 
 done
 ```
@@ -317,7 +317,7 @@ do
 
 #CheckM2 on DASTool bins
 
-~/checkm2/bin/checkm2 predict --threads 10 --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
+~/checkm2/bin/checkm2 predict --threads $SLURM_CPUS_PER_TASK --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
 
 done
 ```
@@ -395,7 +395,7 @@ do
 #CheckM on Das Tool bins
 
 checkm lineage_wf -f 04_Binning/checkm1/${sample}/${sample}_checkm.tsv \
-04_Binning/dastool/${sample}/${sample}_DASTool_bins/ --tab_table -t 20 -x fa 04_Binning/checkm1/${sample}
+04_Binning/dastool/${sample}/${sample}_DASTool_bins/ --tab_table -t $SLURM_CPUS_PER_TASK -x fa 04_Binning/checkm1/${sample}
 
 done
 ```
@@ -438,23 +438,3 @@ scp 'username@jed.epfl.ch:/scratch/username/your_dataset/04_binning/checkm1/*_ch
 ```
 
 **Q: Do you see any differences between the CheckM2 and CheckM results?**
-
-#CONCOCT test
-```
-#!/bin/bash
-cd /data
-
-sample=KR46_May
-
-cut_up_fasta.py 02_Assembly/filtered_contigs/${sample}_contigs.fa -c 10000 -o 0 --merge_last -b 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed > 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa
-
-concoct_coverage_table.py 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed 03_Mapping/${sample}/*.sorted.bam > 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv
-
-concoct --composition_file 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa --coverage_file 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv -b 04_Binning/concoct/${sample}/${sample}
-
-merge_cutup_clustering.py 04_Binning/concoct/${sample}/${sample}_clustering_gt1000.csv > 04_Binning/concoct/${sample}/${sample}_clustering_merged.csv
-
-mkdir 04_Binning/concoct/${sample}/bins_fasta
-
-extract_fasta_bins.py 02_Assembly/filtered_contigs/${sample}_contigs.fa 04_Binning/concoct/${sample}/${sample}_clustering_merged.csv --output_path 04_Binning/concoct/${sample}/bins_fasta
-```
