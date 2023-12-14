@@ -101,7 +101,7 @@ aggregateBinDepths.pl 04_Binning/metabat/${sample}/${sample}_depth.txt 04_Binnin
 
 done
 ```
-You'll need to submit this with an sbatch script calling the metabat image `metabat2.sif` and your metabat script `02_metabat.sh`. You can use most of the same SBATCH parameters you used for concoct - the exception is that metabat is much quicker so you can reduce the time to 2 hours (and it will still likely be quicker than that).
+You'll need to submit this with an sbatch script calling the metabat image `metabat.sif` and your metabat script `04_metabat.sh`. You can use most of the same SBATCH parameters you used for concoct - the exception is that metabat is much quicker so you can reduce the time to 2 hours (and it will still likely be quicker than that).
 
 Congratulations, you now have more bins! You can find them in the **`04_binning/metabat/${sample}/bins_fasta`** directory.
 
