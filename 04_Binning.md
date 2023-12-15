@@ -325,14 +325,22 @@ do
 
 #CheckM2 on DASTool bins
 
-~/checkm2/bin/checkm2 predict --threads $SLURM_CPUS_PER_TASK --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
+~/checkm2/bin/checkm2 predict --database /data2/uniref100.KO.1.dmnd --threads $SLURM_CPUS_PER_TASK --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
 
 done
 ```
 
 CheckM2 works on a directory of genome bins in FASTA format. By default, CheckM2 assumes these files end with the extension ‘fna’, so we are changing it to `fa` with the `–x` flag.
 
-Create an sbatch script to submit the job.
+Copy paste the script at:
+
+```
+
+cp /home/nljacque/scripts2/sbatch_04_checkm2.sh .
+
+```
+
+Ensure the directives are set up correctly.
 ```
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
