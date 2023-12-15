@@ -315,7 +315,7 @@ nano 04_checkm2.sh
 ```
 
 ```
-!/bin/bash
+#!/bin/bash
 cd /data
 
 for sample in $(cat samples.txt)
