@@ -229,9 +229,14 @@ This won't take long so let's try running the job interactively -
 ```
 srun -A bioinformatics-meta-omics1 --pty apptainer shell --bind /scratch/ebell/Subsurface_KR11:/data /home/nljacque/images/dastool.sif
 ```
+Change into your data folder `cd \data
 
-You should now be able to execute the dastool script interactively with:
+We need to say where to find the DAS Tool script `Fasta_to_Contig2Bin.sh`:
+```
+PATH=$PATH:/opt/DAS_Tool-1.1.6/src`
+```
 
+You should now be able to execute the dastool script interactively.
 ```
 bash 04_prepare_dastool.sh
 ```
