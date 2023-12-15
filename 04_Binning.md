@@ -325,7 +325,7 @@ do
 
 #CheckM2 on DASTool bins
 
-~/checkm2/bin/checkm2 predict --database /data2/uniref100.KO.1.dmnd --threads $SLURM_CPUS_PER_TASK --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
+checkm2 predict --database /data2/uniref100.KO.1.dmnd --threads $SLURM_CPUS_PER_TASK --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
 
 done
 ```
