@@ -263,6 +263,8 @@ Then in the `-c` flag below use the appropriate contig file name:
 #!/bin/bash
 cd /data
 
+PATH=$PATH:/opt/DAS_Tool-1.1.6
+
 for sample in $(cat samples.txt)
 
 do
