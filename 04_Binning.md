@@ -268,8 +268,8 @@ Then in the `-c` flag below use the appropriate contig file name:
 #!/bin/bash
 cd /data
 
-PATH=$PATH:/DAS_Tool-1.1.1/DAS_Tool-1.1.1
-PATH=$PATH:/DAS_Tool-1.1.1/DAS_Tool-1.1.1/src
+PATH=$PATH:/DAS_Tool/DAS_Tool-1.1.1
+PATH=$PATH:/DAS_Tool/DAS_Tool-1.1.1/src
 
 for sample in $(cat samples.txt)
 
