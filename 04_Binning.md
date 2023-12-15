@@ -233,7 +233,7 @@ Change into your data folder `cd \data
 
 We need to say where to find the DAS Tool script `Fasta_to_Contig2Bin.sh`:
 ```
-PATH=$PATH:/opt/DAS_Tool-1.1.6/src`
+PATH=$PATH:/opt/DAS_Tool-1.1.6/src
 ```
 
 You should now be able to execute the dastool script interactively.
