@@ -231,16 +231,16 @@ srun -A bioinformatics-meta-omics1 --pty apptainer shell --bind /scratch/ebell/S
 ```
 Change into your data folder `cd /data`
 
-We need to say where to find the DAS Tool script `Fasta_to_Contig2Bin.sh`:
-```
-PATH=$PATH:/opt/DAS_Tool-1.1.6/src
-```
-
 You should now be able to execute the dastool script interactively.
 ```
 bash 04_prepare_dastool.sh
 ```
 You can type `exit` to exit the interactive apptainer.
+
+Else execute the script through a job by editing the sbatch file setting the image as:
+```
+/home/nljacque/test/das_tool_latest.sif
+```
 
 You should now have two files for each of your samples:
 
@@ -268,13 +268,14 @@ Then in the `-c` flag below use the appropriate contig file name:
 #!/bin/bash
 cd /data
 
-PATH=$PATH:/opt/DAS_Tool-1.1.6
+PATH=$PATH:/DAS_Tool/DAS_Tool-1.1.1
+PATH=$PATH:/DAS_Tool/DAS_Tool-1.1.1/src
 
 for sample in $(cat samples.txt)
 
 do
 
-DAS_Tool -i 04_Binning/dastool/${sample}.concoct.contigs2bin.tsv,04_Binning/dastool/${sample}.metabat.contigs2bin.tsv -l concoct,metabat -c 02_Assembly/filtered_contigs/${sample}.contigs.fa -o 04_Binning/dastool/${sample}/${sample} --write_bins --threads $SLURM_CPUS_PER_TASK
+DAS_Tool -i 04_Binning/dastool/${sample}.concoct.contigs2bin.tsv,04_Binning/dastool/${sample}.metabat.contigs2bin.tsv -l concoct,metabat -c 02_Assembly/filtered_contigs/${sample}.contigs.fa -o 04_Binning/dastool/${sample}/${sample} --write_bins --threads 20
 
 done
 ```
@@ -324,14 +325,22 @@ do
 
 #CheckM2 on DASTool bins
 
-~/checkm2/bin/checkm2 predict --threads $SLURM_CPUS_PER_TASK --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
+checkm2 predict --database /data2/uniref100.KO.1.dmnd --threads $SLURM_CPUS_PER_TASK --input 04_Binning/dastool/${sample}/${sample}_DASTool_bins/ -x fa --output-directory 04_Binning/checkm2/${sample}/
 
 done
 ```
 
 CheckM2 works on a directory of genome bins in FASTA format. By default, CheckM2 assumes these files end with the extension ‘fna’, so we are changing it to `fa` with the `–x` flag.
 
-Create an sbatch script to submit the job.
+Copy paste the script at:
+
+```
+
+cp /home/nljacque/scripts2/sbatch_04_checkm2.sh .
+
+```
+
+Ensure the directives are set up correctly.
 ```
 #SBATCH --nodes 1
 #SBATCH --ntasks 1
