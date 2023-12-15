@@ -17,7 +17,7 @@ nano 05_gtdb.sh
 #!/bin/bash
 cd data/
 
-GTDBTK_DATA_PATH=/data2/gtdb/release214
+export GTDBTK_DATA_PATH=/data2/release214
 
 for sample in $(cat samples.txt)
 
