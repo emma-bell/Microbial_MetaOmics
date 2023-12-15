@@ -17,6 +17,8 @@ nano 05_gtdb.sh
 #!/bin/bash
 cd data/
 
+GTDBTK_DATA_PATH=/data2/gtdb/release214
+
 for sample in $(cat samples.txt)
 
 do
@@ -25,8 +27,13 @@ gtdbtk classify_wf --genome_dir 04_Binning/dastool/${sample}/${sample}_DASTool_b
 
 done
 ```
+Copy paste the script at:
 
-Then create a sbatch script:
+```
+cp /home/nljacque/scripts2/sbatch_05_gtdbtk.sh .
+```
+
+Ensure the directives are set up correctly.
 
 ```
 #SBATCH --nodes 1
