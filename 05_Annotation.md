@@ -15,7 +15,7 @@ nano 05_gtdb.sh
 
 ```
 #!/bin/bash
-cd data/
+cd /data
 
 export GTDBTK_DATA_PATH=/data2/release214
 
