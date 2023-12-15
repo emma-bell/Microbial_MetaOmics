@@ -15,7 +15,7 @@ cp -r /scratch/ebell/Subsurface_KR46/01_ReadQC/fastqc_pass2 01_ReadQC
 
 # From 02_Assembly we'll just keep the final contig files
 mkdir 02_Assembly
-cp -r /scratch/ebell/Subsurface_KR46/02_Assembly/filtered_contigs 02_Assembly 02_Assembly
+cp -r /scratch/ebell/Subsurface_KR46/02_Assembly/filtered_contigs 02_Assembly
 
 #We won't keep the bam files from the 03_Mapping as they're large and we won't need them again. But in "real life" don't delete them yet.
 
