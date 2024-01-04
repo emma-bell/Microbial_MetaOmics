@@ -278,7 +278,7 @@ amp_taxtab <- read.delim("ASVs_taxonomy.tsv")
 colnames(amp_taxtab)[1]="ASV"
 ```
 
-Ampvis can take a metadata file. This can include as many different paraments as you'd like to visualise but the first column should be "SampleID". Load the metadata file:
+Ampvis can take a metadata file. This can include as many different parameters as you'd like to visualise but the first column should be "SampleID". Load the metadata file:
 ```
 amp_meta <- read.delim("metadata.txt", header = TRUE)
 ```

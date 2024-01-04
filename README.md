@@ -14,7 +14,7 @@ This repository contains the practical workshop for Hands-on Bioinformatics for 
 * [03_Mapping](03_Mapping.md)
 * [04_Binning](04_Binning.md)
 * [05_Taxonomic_Annotation](05_Annotation.md#taxonomic-annotation)
-* [End_of_Week1](07_End_of_week_save.md)
+* [End_of_Week1](00_End_of_week1_save.md)
 
 ## Week 2 (29th - 2nd February)
 ### Metagenomic data continued
