@@ -366,7 +366,7 @@ awk -F "\t" '$2 >=50 && $3 <=10' 04_Binning/checkm2/${sample}/quality_report.tsv
 
 done
 ```
-* `awk` is widely used for text processing in terminal
+* `awk` is used for text processing in terminal
 * `-F "\t"` is telling the command that our columns in `quality_report.tsv` are separated by a tab (`"\t"`)
 * `'$2 >=50 && $3 <=10'` is looking for values >50 in column 2 (i.e., completeness >50) AND values <10 in column 3 (i.e., contamination <10)
 * How did I know which columns to select?

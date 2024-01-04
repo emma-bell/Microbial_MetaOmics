@@ -4,13 +4,21 @@ This repository contains the practical workshop for Hands-on Bioinformatics for 
 # Course Overview
 * [00_Requirements](00_Requirements.md)
 
-## Part 1
-* [Amplicon Analysis](Amplicon_Analysis.md)
+## Week 1 (11th - 15th December)
+### Amplicon data
+* [16S rRNA gene amplicon analysis](Amplicon_Analysis.md)
 
-## Part 2
+### Metagenomic data
 * [01_Read_QC](01_Read_QC.md)
 * [02_Assembly](02_Assembly.md)
 * [03_Mapping](03_Mapping.md)
 * [04_Binning](04_Binning.md)
-* [05_Annotation](05_Annotation.md)
-* [06_Representative_MAGs]
+* [05_Taxonomic_Annotation](05_Annotation.md#taxonomic-annotation)
+* [End_of_Week1](07_End_of_week_save.md)
+
+## Week 2 (29th - 2nd February)
+### Metagenomic data continued
+* [05_Functional_Annotation](05_Annotation.md#functional-annotation)
+* [06_Representative_MAGs](06_Representative_MAGs.md)
+
+### Metatranscriptomics, metaproteomics, and data visualisation
