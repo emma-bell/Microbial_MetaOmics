@@ -210,7 +210,7 @@ head(taxa.print)
 ```
 
 ### 10. Write output
-We'll follow the steps from [this tutorial](https://astrobiomike.github.io/amplicon/dada2_workflow_ex#extracting-the-standard-goods-from-dada2) to get a fasta file **`ASVs.fa`**, a count table **`ASVs_counts.tsv`**, and a taxonomy table **`ASVs_taxonomy.tsv`**. [This tutorial](https://astrobiomike.github.io/amplicon/dada2_workflow_ex#extracting-the-standard-goods-from-dada2) also discusses each of the steps in detail and is a useful resource if you want to learn more.
+We'll follow the steps from [this tutorial](https://astrobiomike.github.io/amplicon/dada2_workflow_ex#extracting-the-standard-goods-from-dada2) to get a fasta file **`ASVs.fa`**, a count table **`ASVs_counts.tsv`**, and a taxonomy table **`ASVs_taxonomy.tsv`**. [This tutorial](https://astrobiomike.github.io/amplicon/dada2_workflow_ex) also discusses each of the steps in detail and is a useful resource if you want to learn more.
 
 Change sequence headers to ASV_1, ASV_2...
 ```
