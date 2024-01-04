@@ -264,7 +264,7 @@ write.table(asv_tax, "ASVs_taxonomy.tsv", sep="\t", quote=F, col.names=NA)
 You can find a copy of the expected output files on the github under **amplicon_output**.
 
 ## Visualise the results
-There are lots of different ways to visualise amplicon data. Today we'll use [ampvis2](https://kasperskytte.github.io/ampvis2/).
+There are lots of different ways to visualise amplicon data. Today we'll use [ampvis2](https://kasperskytte.github.io/ampvis2/). [Here](amplicon_output) is a copy of the data we generated above that we'll load into R to process with ampvis2.
 
 First let's load the ASV table and add "ASV" to the first column header:
 ```

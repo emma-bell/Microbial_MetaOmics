@@ -54,7 +54,9 @@ Download these files to your laptop:
 ```
 scp 'username@jed.epfl.ch:/scratch/username/your_dataset/05_Annotation/gtdb/*summary.tsv' .
 ```
-You can view this files in excel or R. What taxa do you have in your samples?
+You can view this files in excel or R. 
+
+**Q: Which taxa do you have in your samples? Do you have the same taxa in multiple samples?**
 
 # Functional Annotation
 We also want to know what the microbes we have might be doing. We're going to perform functional annotation with [METABOLIC](https://github.com/AnantharamanLab/METABOLIC).
