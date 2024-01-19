@@ -64,7 +64,7 @@ We also want to know what the microbes we have might be doing. We're going to pe
 METABOLIC can be run using either **nucleotide** or **amino acid** sequences. We generated amino acid sequence files during our checkm2 run so we'll use those, but if you want to convert from a **nucleotide** file to an **amino acid** file yourself in the future you can use a tool called [Prodigal](https://github.com/hyattpd/Prodigal/tree/GoogleImport).
 
 Our amino acid files are here:
-**`04_Binning/checkm2/SAMPLE/protein_files/`**. They now end with `.faa` meaning it is a fasta file that contains amino acid sequences. You can use the head command to take a look.
+**`04_Binning/checkm2/SAMPLE/protein_files/`**. They now end with **`.faa`** meaning it is a fasta file that contains amino acid sequences. You can use the **`head`** command to take a look.
 
 ```
 >KR46_June_NODE_64_length_85318_cov_103.948078_2 # 497 # 1834 # 1 # ID=1_2;partial=00;start_type=ATG;rbs_motif=GGA/GAG/AGG;rbs_spacer=5-10bp;gc_cont=0.389
@@ -76,7 +76,7 @@ EITGLILTKVDGDARGGAAISIRAVTSKPIKFVTTGEKMADLEAFHPDRMASRILGMGDL
 LSLIEKAQESFDSKKVKEMEEKLRGQGFTLDDFLDQMEQMKSLGPLDQLLEMIPGANSKQ
 ```
 
-Make the directory for our annotation:
+Now let's make a directory for our METABOLIC annotation:
 ```
 mkdir 05_Annotation/metabolic
 ```
@@ -90,18 +90,20 @@ nano 05_metabolic.sh
 #!/bin/bash
 cd /data
 
+metabolic=/work/eml-course_bioinfo_metaomics/METABOLIC
+
 for sample in $(cat samples.txt)
 
 do
 
 mkdir -p 05_Annotation/metabolic/${sample}
 
-perl METABOLIC-G.pl -in 04_Binning/checkm2/${sample}/protein_files/ -o 05_Annotation/metabolic/${sample} -t $SLURM_CPUS_PER_TASK
+perl ${metabolic}/METABOLIC-G.pl -in 04_Binning/checkm2/${sample}/protein_files/ -o 05_Annotation/metabolic/${sample} -t $SLURM_CPUS_PER_TASK
 
 done
 ```
 
-#need to specify location of **`METABOLIC-G.pl`**
+Double check the script **`METABOLIC-G.pl`** is found in the specified location.
 
 ```
 #SBATCH --nodes 1
@@ -111,5 +113,5 @@ done
 #SBATCH --mem=140G
 ```
 
-METABOLIC will take some time to run, so we can move on to the next steps whilst we are waiting for it to complete.
+METABOLIC will take some time to run, so we can move on to the [next steps](06_Representative_MAGs.md) whilst we are waiting for it to complete.
 
