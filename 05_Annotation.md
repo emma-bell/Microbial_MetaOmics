@@ -124,5 +124,24 @@ ls 04_Binning/checkm2/ | cut -f3 -d "/" > samples.txt
 * The greater-than sign (`>`) then sends the result to `samples.txt`.
 * Check it worked correctly with `head samples.txt`.
 
+When METABOLIC is finished it will have generated multiple files within the `05_Annotation/metabolic` directory:
+```
+metabolic/
+├── KR46_June
+│   ├── Each_HMM_Amino_Acid_Sequence
+│   ├── intermediate_files
+│   ├── KEGG_identifier_result
+│   ├── METABOLIC_Figures
+│   ├── METABOLIC_Figures_Input
+│   ├── METABOLIC_log.log
+│   ├── METABOLIC_result_each_spreadsheet
+│   ├── METABOLIC_result.xlsx
+│   └── METABOLIC_run.log
+```
+
+To copy the files to your laptop (using `scp -r`) and take a look the key files are:
+* `METABOLIC_result.xlsx` : An excel file containing all of the generated results
+* `METABOLIC_Figures` : Figures that are generated for some key metabolic pathways (C, N, S)
+
 METABOLIC will take some time to run, so we can move on to the [next steps](06_Representative_MAGs.md) whilst we are waiting for it to complete.
 
