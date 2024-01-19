@@ -28,14 +28,14 @@ cp -r /scratch/ebell/Subsurface_KR46/02_Assembly/filtered_contigs 02_Assembly
 
 We won't keep the bam files from the **`03_Mapping`** as they're large and we won't need them again. But in "real life" don't delete them yet.
 
-# We will keep the whole **`04_Binning`**, **`05_Annotation`** and **`06_Representative_MAGs`** directories
+### We will keep the whole **`04_Binning`**, **`05_Annotation`** and **`06_Representative_MAGs`** directories
 ```
 cp -r /scratch/ebell/Subsurface_KR46/04_Binning .
 cp -r /scratch/ebell/Subsurface_KR46/05_Annotation .
 cp -r /scratch/ebell/Subsurface_KR46/06_Representative_MAGs .
 ```
 
-# Let's not forget our scripts!
+### Let's not forget our scripts!
 ```
 mkdir scripts
 cp /scratch/ebell/Subsurface_KR46/*.sh scripts/
