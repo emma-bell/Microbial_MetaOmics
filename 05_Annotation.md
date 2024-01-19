@@ -113,5 +113,16 @@ Double check the script **`METABOLIC-G.pl`** is found in the specified location.
 #SBATCH --mem=140G
 ```
 
+If you don't have a samples.txt anymore **`(/scratch/USERNAME/DATASET/samples.txt)`** you can quickly create one:
+
+```
+ls 04_Binning/checkm2/ | cut -f3 -d "/" > samples.txt
+```
+
+* This script is listing (`ls`) subdirectories that have our sample names (`04_Binning/checkm2/SAMPLE`). We could have chosen any directory with the same structure.
+* It is then piped (`|`) to the command `cut`. `-f3` tells cut we want the third part (i.e.,SAMPLE) from a string of text delimited with a forward slash (`-d "/"`).
+* The greater-than sign (`>`) then sends the result to `samples.txt`.
+* Check it worked correctly with `head samples.txt`.
+
 METABOLIC will take some time to run, so we can move on to the [next steps](06_Representative_MAGs.md) whilst we are waiting for it to complete.
 
