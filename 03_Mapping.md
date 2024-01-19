@@ -21,24 +21,27 @@ nano 03_strobealign.sh
 #!/bin/bash
 cd /data
 
-#set the sample variable
-sample=your_sample
-
-for reads in $(cat samples.txt)
+for sample in $(cat samples.txt)
 
 do
 
-strobealign 02_Assembly/filtered_contigs/${sample}_contigs.fa \
-01_ReadQC/fastp_reads/${reads}_R1.fastq.gz 01_ReadQC/fastp_reads/${reads}_R2.fastq.gz \
--t 20 | samtools sort -o 03_Mapping/${sample}/${reads}.sorted.bam
+    for reads in $(cat samples.txt)
 
-samtools index 03_Mapping/${sample}/${reads}.sorted.bam
+    do
+
+    strobealign 02_Assembly/filtered_contigs/${sample}_contigs.fa \
+    01_ReadQC/fastp_reads/${reads}_R1.fastq.gz 01_ReadQC/fastp_reads/${reads}_R2.fastq.gz \
+    -t $SLURM_CPUS_PER_TASK | samtools sort -o 03_Mapping/${sample}/${reads}.sorted.bam
+
+    samtools index 03_Mapping/${sample}/${reads}.sorted.bam
+
+    done
 
 done
 ```
 
 * `strobealign ... | samtools sort -o ...` Calls the 'strobealign' command to align reads to filtered contigs, and then pipes (`|`) the output to `samtools sort` to create a sorted BAM file.
-* `-t 20` Specifies the number of threads for parallel processing.
+* `-t` Specifies the number of threads for parallel processing.
 * `samtools index` Creates an index for the sorted BAM file using
 
 Again, you'll need to create an sbatch script to submit this job. The image should be `samtools-strobealign.sif` and your script should be `03_strobealign.sh`
