@@ -27,30 +27,34 @@ do
 
 done
 
-# Extract columns 1 (sample name), 2 (completeness), and 3 (contamination) from the concatenated file, add ".fa," to the sample names, and redirect to a temporary file
 
+# Extract columns 1 (sample name), 2 (completeness), and 3 (contamination) from the concatenated file, add ".fa," to the sample names, and redirect to a temporary file
 awk '{print $1, $2, $3}' OFS="," 06_Representative_MAGs/drep/checkm2.tmp | sed 's/,/.fa,/' > 06_Representative_MAGs/drep/checkm2_for_drep.tmp
 
-# Define headers
 
+# Define headers
 headers=genome,completeness,contamination
 echo $headers > 06_Representative_MAGs/drep/headers.tmp
 
-# Concatenate the header file and the modified checkm2_for_drep file into a CSV file. This is the file we keep for dRep.
 
+# Concatenate the header file and the modified checkm2_for_drep file into a CSV file. This is the file we keep for dRep.
 cat 06_Representative_MAGs/drep/headers.tmp 06_Representative_MAGs/drep/checkm2_for_drep.tmp > 06_Representative_MAGs/drep/checkm2_for_drep.csv
 
-# Remove temporary files
 
+# Remove temporary files
 rm 06_Representative_MAGs/drep/*.tmp
 
 ```
 
 You can run the above script directly in your terminal with `bash`.
 
-If you run `head 06_Representative_MAGs/drep/checkm2_for_drep.csv `
+Afterwards, check that everything looks as expected with:
 
-You should have a file that looks like this:
+```
+head 06_Representative_MAGs/drep/checkm2_for_drep.csv
+```
+
+You should have a comma separated file that looks like this:
 
 ```
 genome,completeness,contamination
@@ -60,11 +64,11 @@ KR46_June_concoct_bin.26.fa,77.23,3.49
 KR46_June_concoct_bin.39.fa,77.09,3.45
 ```
 
-Now make a directory for all of the MAGs you will dereplicate:
+Look good? Ok, now make a directory for all of your MAGs from all samples, which we will then dereplicate:
 
 `mkdir 06_Representative_MAGs/MAGs`
 
-And copy all of your MAGs to that directory:
+And make a copy all of your MAGs in directory:
 
 ```
 for sample in $(cat samples.txt); do cp 04_Binning/dastool/${sample}/${sample}_DASTool_bins/*.fa 06_Representative_MAGs/MAGs/; done
@@ -143,17 +147,15 @@ First we need to create a concatenated file of your dereplicated genomes (i.e., 
 cat 06_Representative_MAGs/drep/dereplicated_genomes/*.fa > 06_Representative_MAGs/MAGdb.fa
 ```
 
-Then we'll use Strobelign to map our reads to our representative MAGs.
-
-First make a directory for the output of Strobelign:
+Then we'll use Strobelign to map our reads to our representative MAGs. Let's make a directory for the output of Strobelign:
 
 ```
 mkdir 06_Representative_MAGs/reads_to_mags
 ```
 
-We have used Strobealign before to map our reads to our assembled contigs. Can you edit the [script](03_Mapping.md#1-perform-mapping-with-strobealign) we used previously to map reads to MAGs?
+We have used Strobealign before to map our qc reads to our assembled contigs. Can you edit the [script](03_Mapping.md#1-perform-mapping-with-strobealign) we used previously to now map qc reads to the dereplicated MAGs?
 
-Note: Last time we were mapping all reads to multiple samples. This time we will map all reads to the representative MAGs (**`06_Representative_MAGs/MAGdb.fa`**) only.
+Note: Last time we were mapping all reads to multiple samples. This time we will map all reads to the representative MAGs only (`06_Representative_MAGs/MAGdb.fa`).
 
 ```
 nano 06_strobealign_repMAGs.sh
@@ -178,6 +180,9 @@ samtools index 06_Representative_MAGs/reads_to_mags/${sample}.sorted.bam
 done
 ```
 
+</details>
+
+
 You'll need to prepare an sbatch script with the image `samtools-strobealign.sif`:
 ```
 #SBATCH --nodes 1
@@ -186,8 +191,6 @@ You'll need to prepare an sbatch script with the image `samtools-strobealign.sif
 #SBATCH --time 10:00:00
 #SBATCH --mem=140G
 ```
-
-</details>
 
 ### Calculating relative abundance with CoverM
 
@@ -201,7 +204,9 @@ mkdir 06_Representative_MAGs/coverm
 #!/bin/bash
 cd /data
 
-coverm genome -d 06_Representative_MAGs/drep/dereplicated_genomes/ -x fa -b 06_Representative_MAGs/reads_to_mags/*.bam -o 06_Representative_MAGs/coverm/coverm_drep_mag_rel_abun.tsv --threads $SLURM_CPUS_PER_TASK
+coverm genome -d 06_Representative_MAGs/drep/dereplicated_genomes/ -x fa \
+-b 06_Representative_MAGs/reads_to_mags/*.bam -o 06_Representative_MAGs/coverm/coverm_drep_mag_rel_abun.tsv \
+--threads $SLURM_CPUS_PER_TASK
 ```
 * `-d` : a directory containing FASTA files of each genome
 * `-x` : tells CoverM that our genomes end in the extension `.fa`
@@ -220,3 +225,5 @@ Prepare an sbatch script with the image `coverm.sif`:
 ```
 
 Copy the results (`06_Representative_MAGs/coverm/coverm_drep_mag_rel_abun.tsv`) to your laptop with `scp`.
+
+Congratulations! You've just completed a metagenomic workflow from raw Illumina short reads through to taxonomically and functionally annotated metagenome-assembled genomes (MAGs)! You'll often here this referred to as "genome-resolved metagenomics". What happens now? What did you find? Don't worry, we're going to go through the outputs we've generated and think about different ways to present the data on Wednesday when we explore [data visualisation](08_Data_visualisation.md).
