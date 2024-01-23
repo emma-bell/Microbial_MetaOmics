@@ -68,6 +68,7 @@ To be able to participate
 * [GTDB-Tk](https://github.com/Ecogenomics/GTDBTk)
 * [METABOLIC](https://github.com/AnantharamanLab/METABOLIC)
 * [CoverM](https://github.com/wwood/CoverM)
+* [GToTree](https://github.com/AstrobioMike/GToTree/wiki/)
 
 # Set-up your working directory
 After logging in to SCITAS set up your working directory.
@@ -99,3 +100,5 @@ cd ..
 * Assign taxonomy with GTDB-Tk
 * Annotate function with METABOLIC
 * Calculate relative abundance with CoverM
+* Make a phylogenomic tree with GToTree
+* Visualise the tree with iTOL
