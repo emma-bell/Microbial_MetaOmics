@@ -226,4 +226,4 @@ Prepare an sbatch script with the image `coverm.sif`:
 
 Copy the results (`06_Representative_MAGs/coverm/coverm_drep_mag_rel_abun.tsv`) to your laptop with `scp`.
 
-Congratulations! You've just completed a metagenomic workflow from raw Illumina short reads through to taxonomically and functionally annotated metagenome-assembled genomes (MAGs)! You'll often here this referred to as "genome-resolved metagenomics". What happens now? What did you find? Don't worry, we're going to go through the outputs we've generated and think about different ways to present the data on Wednesday when we explore [data visualisation](08_Data_visualisation.md).
+Congratulations! You've just completed a metagenomic workflow from raw Illumina short reads through to taxonomically and functionally annotated metagenome-assembled genomes (MAGs)! You'll often hear this type of workflow referred to as "genome-resolved metagenomics". What happens now? What did you find? Don't worry, we're going to go through the outputs we've generated and think about different ways to present the data on Wednesday when we explore [data visualisation](08_Data_visualisation.md).
