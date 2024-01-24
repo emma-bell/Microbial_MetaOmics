@@ -27,7 +27,7 @@ We've completed the bioinformatic analyses but we also want to make sense of som
 We're going to do most of the data visualisation with R Studio. So if you haven't already, create a copy of these files on your laptop. I find it useful to create the same file structure on my laptop to make it easier to keep track of things.
 
 ## Generate figures for presentations/papers
-In R Studio we're going to be using the packages [Tidyverse](https://tidyverse.tidyverse.org) and [Complex Heatmap](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html). Instructions for installation can be found at the previous links and on the [00_Requirements](00_Requirements.md) page. You get a copy of the instructions for this section from the Moodle course page.
+In R Studio we're going to be using the packages [Tidyverse](https://tidyverse.tidyverse.org) and [Complex Heatmap](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html). Instructions for installation can be found at the previous links and on the [00_Requirements](00_Requirements.md) page. You can find the instructions for this section on the Moodle course page.
 
 ## Make a phylogenomic tree with GToTree
 We're going to make a phylogenomic tree using [GToTree](https://github.com/AstrobioMike/GToTree/wiki/example-usage). This tool is really easy to use and has excellent documentation so it's worth checking out the link for more information. Below we'll go through an example with some of the data we've been working on.
@@ -36,7 +36,7 @@ Let's log into SCITAS and make a directory for data visualisation in your workin
 
 `mkdir 08_Visualisation`
 
-Looking at the MAG taxonomy table we created called **`gtdb_tax`**, I'm interested in the genus "SURF-10". In the example I'm using, the genomes came from deep groundwater in Finland. I follow subsurface research so I recognise that "SURF" probably means the genus name came from a genome from the Sanford Underground Research facility. I'd like to know a bit more about the SURF-10 genus.
+Looking at the MAG taxonomy table we created called **`gtdb_tax.tsv`**, I'm interested in the genus "SURF-10". In the example I'm using, the genomes came from deep groundwater in Finland. I follow subsurface research so I recognise that "SURF" probably means the genus name came from a genome from the Sanford Underground Research facility. I'd like to know a bit more about the SURF-10 genus.
 
 From your dataset you can choose any MAG/taxonomy you want, at any taxonomic level.
 
@@ -48,7 +48,7 @@ srun -A bioinformatics-meta-omics2 --pty apptainer shell --bind /scratch/YOUR_US
 
 Change into your data folder `cd /data`
 
-With GtoTree, we can look for "SURF-10" genomes in GTDB using the following command:
+With GToTree, we can look for "SURF-10" genomes in GTDB using the following command:
 
 ```
 gtt-get-accessions-from-GTDB -t SURF-10 --get-taxon-counts --GTDB-representatives-only
@@ -95,16 +95,7 @@ gtt-hmms
 I'm going to choose "Bacteria" for my SURF10 genomes which have the taxonomy:
 `d__Bacteria;p__Desulfobacterota;c__Desulfarculia;o__Desulfarculales;f__Desulfarculaceae;g__SURF-10;s__SURF-10 sp018902755`. You want to choose the most specific HMM set that you can.
 
-Next we will create a file telling GToTree which of our genomes we want to input.
-In R studio, I'm filtering the rows of the **`MAG_rep_summary`** by the taxonomy classification I'm interested in to recover the file name of my SURF-10 genome:
-
-```
-MAG_rep_summary %>% 
-  filter(classification == "d__Bacteria;p__Desulfobacterota;c__Desulfarculia;o__Desulfarculales;f__Desulfarculaceae;g__SURF-10;s__SURF-10 sp018902755") %>%
-  %>% select(genome)
-```
-
-For me, this returns the genome entry `KR46_May_metabat.bin.4`.
+Next we will create a file telling GToTree which of our genomes we want to input. In **`gtdb_taxonomy.tsv`** I can can see my SURF-10 genome is called `KR46_May_metabat.bin.4`.
 
 Back in terminal, create a text file:
 
@@ -118,11 +109,11 @@ And put the path to your genome:
 /scratch/USERNAME/06_Representative_MAGs/MAGs/YOURGENOME.fa
 ```
 
-We also need an outgroup to be able to root the tree. I'm using another genome from my dataset. It doesn't matter which genome you choose but consider **(1)** where possible use a genome that the chosen HMM set will apply to. If too many SCGs are missing from the genome GToTree will exclude it from the analysis **(2)** it should be different enough from your genomes of interest - I've chosen a different phylum, within the domain bacteria.
+We also need an outgroup to be able to root the tree. I'm going to use another genome from my dataset. It doesn't matter which genome you choose, but do consider: **(1)** where possible, use a genome that the chosen HMM set will apply to. If too many SCGs are missing from the genome GToTree will exclude it from the analysis **(2)** it should be different enough from your genomes of interest - I've chosen a different phylum, within the domain bacteria.
 
 Add the path of your outgroup to the **`MAG_fasta.txt`** file.
 
-Another cool thing about GToTree is that you can look for genes of interest using an additional HMM search. In this example, let's say I would like to know whether all sequenced members of the SURF-10 genus have the genes _dsrA_ and _dsrB_ that make up the dissimilatory sulfate reductase enzyme. The [KEGG Orthology (KO)](https://www.genome.jp/kegg/ko.html) for those genes are `K11180` and `K11181`. 
+Another cool thing about GToTree is that you can look for genes of interest using an additional HMM search. In this example, I would like to know whether all sequenced members of the SURF-10 genus have the genes _dsrA_ and _dsrB_ that make up the dissimilatory sulfate reductase enzyme. The [KEGG Orthology (KO)](https://www.genome.jp/kegg/ko.html) for those genes are `K11180` and `K11181`. 
 
 You can choose a gene and `KO` ID from your annotation results file **`METABOLIC_result.tsv`**. You can also view different [pathway maps](https://www.genome.jp/kegg/pathway.html) on the KEGG PATHWAY Database website.
 
