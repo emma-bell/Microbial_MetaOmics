@@ -27,7 +27,7 @@ We've completed the bioinformatic analyses but we also want to make sense of som
 We're going to do most of the data visualisation with R Studio. So if you haven't already, create a copy of these files on your laptop. I find it useful to create the same file structure on my laptop to make it easier to keep track of things.
 
 ## Generate figures for presentations/papers
-In R Studio we're going to be using the packages [Tidyverse](https://tidyverse.tidyverse.org) and [Complex Heatmap](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html). Instructions for installation can be found at the previous links and on the [00_Requirements](00_Requirements.md) page.
+In R Studio we're going to be using the packages [Tidyverse](https://tidyverse.tidyverse.org) and [Complex Heatmap](https://bioconductor.org/packages/release/bioc/html/ComplexHeatmap.html). Instructions for installation can be found at the previous links and on the [00_Requirements](00_Requirements.md) page. You get a copy of the instructions for this section from the Moodle course page.
 
 ## Make a phylogenomic tree with GToTree
 We're going to make a phylogenomic tree using [GToTree](https://github.com/AstrobioMike/GToTree/wiki/example-usage). This tool is really easy to use and has excellent documentation so it's worth checking out the link for more information. Below we'll go through an example with some of the data we've been working on.
@@ -36,8 +36,7 @@ Let's log into SCITAS and make a directory for data visualisation in your workin
 
 `mkdir 08_Visualisation`
 
-In R Studio I'm looking at the taxonomy of my MAGs in the table we created called **`gtdb_tax`**.
-Looking at the table I'm interested in the genus "SURF-10". In the data I'm using in this example the genomes came from deep groundwater in Finland. I follow subsurface research so I recognise that "SURF" probably means the genus name came from a genome from the Sanford Underground Research facility. I'd like to know a bit more and see if our SURF-10 MAGs are closely related.
+Looking at the MAG taxonomy table we created called **`gtdb_tax`**, I'm interested in the genus "SURF-10". In the example I'm using, the genomes came from deep groundwater in Finland. I follow subsurface research so I recognise that "SURF" probably means the genus name came from a genome from the Sanford Underground Research facility. I'd like to know a bit more about the SURF-10 genus.
 
 From your dataset you can choose any MAG/taxonomy you want, at any taxonomic level.
 
