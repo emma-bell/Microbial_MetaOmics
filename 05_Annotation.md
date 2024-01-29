@@ -41,6 +41,9 @@ Ensure the directories are set up correctly.
 #SBATCH --cpus-per-task 20
 #SBATCH --time 10:00:00
 #SBATCH --mem=140G
+#SBATCH --account=bioinformatics-meta-omics2
+#SBATCH --reservation=bioinformatics_meta-omics2
+
 ```
 
 When the run is finished, make sure to check the log file for errors.
