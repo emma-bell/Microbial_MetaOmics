@@ -93,7 +93,7 @@ nano 05_metabolic.sh
 #!/bin/bash
 cd /data
 
-metabolic=/work/eml-course_bioinfo_metaomics/METABOLIC
+metabolic=/data2/METABOLIC
 
 for sample in $(cat samples.txt)
 
