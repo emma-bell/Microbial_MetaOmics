@@ -114,6 +114,9 @@ Double check the script **`METABOLIC-G.pl`** is found in the specified location.
 #SBATCH --cpus-per-task 20
 #SBATCH --time 10:00:00
 #SBATCH --mem=140G
+#SBATCH --account=bioinformatics-meta-omics1
+#SBATCH --reservation=bioinformatics_meta-omics2
+
 ```
 
 If you don't have a samples.txt anymore **`(/scratch/USERNAME/DATASET/samples.txt)`** you can quickly create one:
