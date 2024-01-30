@@ -160,6 +160,91 @@ BiocManager::install("PACKAGE")
 
 The script provided includes steps such as data preprocessing, quality control, statistical testing, and result visualization, producing summary reports and plots for further analysis and interpretation.
 
+Here are some explanations about the different parts: 
+
+```
+####--Getting today date--####
+
+date<-Sys.Date()
+time<-format(Sys.time(), "%H-%M-%S")
+
+####--Setting working directory--####
+
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+####--Libraries--####
+
+library(xlsx)
+library(stringr)
+library('DESeq2')
+library("RColorBrewer")
+library(pheatmap)
+library(ReportingTools)
+library(EnhancedVolcano)
+
+#if (!require("BiocManager", quietly = TRUE))
+#  install.packages("BiocManager")
+#BiocManager::install("EnhancedVolcano")
+if (!require("BiocManager", quietly = TRUE))
+  install.packages("BiocManager")
+
+BiocManager::install("DESeq2")
+
+```
+
+Here are just the libraries, that you have to install if you do not already have them.
+
+```
+####--Setting global variable--####
+
+#data2=/work/eml-course_bioinfo_metaomics/datasets/arsenic
+#raw=data2
+
+#metatranscriptome/alignments
+
+# MG
+#Ends : protein_id bin kegg description MG_DNA_TPM(kallisto or feature counts) MT_TPM(kallisto) 
+
+headers=c("gene_id","KO_id","KO_description","ncbi_genus_id","kegg_gene_id","GHOSTX_score")
+
+#headers:https://www.kegg.jp/blastkoala/help_ghostkoala.html
+
+# Column1	User's gene id
+# Column2.0 K number (KO identifier) assinged
+# Column2.1 K number (KO identifier) assinged
+# Column3	Second level of the KEGG Organisms hierarchy <-Are in wide format /!\
+# Column4	Third level of the KEGG Organisms hierarchy <-Are in wide format /!\
+# Column5	Genus in the NCBI taxonomy
+# Column6	KEGG GENES ID
+# Column7	GHOSTX score
+
+#KO Identifier (K number): Represents a functional category or orthologous group.
+#KEGG GENES ID: Represents a unique identifier for an individual gene.
+
+####--Loading data--####
+
+#--From the metagenome
+
+#-Ghostkoala
+
+ghostkoala_table<-read.delim2(
+  "raw/metagenome/annotation/ghostkoala/EA_WTA_ghostkoala.tsv",
+  header=F,
+  col.names = headers)
+
+#Here we just clean a bit the data
+ghostkoala_table<-ghostkoala_table[ghostkoala_table$gene_id!="",]
+
+  ```
+All of this part is just to load the annotation data, generated with ghostkoala. You will need to download the EA_WTA_ghostkoala.tsv present at:
+/work/eml-course_bioinfo_metaomics/datasets/arsenic/
+
+And set it up at "raw/metagenome/annotation/ghostkoala" or else simply change the path to whenever you put it.
+
+The path after "raw" where data is located in the arsenic folder on the scitas.
+
+##Proteomic part
+
 In this dataset protein abundance has been acquired by sending the prodigal output to another laboratory specialized in high pressure liquid chromatography coupled to inductively-coupled plasma mass spectrometry.
 
 Here are the steps that have been applied to the data:
