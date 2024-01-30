@@ -236,14 +236,7 @@ ghostkoala_table<-read.delim2(
 ghostkoala_table<-ghostkoala_table[ghostkoala_table$gene_id!="",]
 
   ```
-All of this part is just to load the annotation data, generated with ghostkoala. You will need to download the EA_WTA_ghostkoala.tsv present at:
-/work/eml-course_bioinfo_metaomics/datasets/arsenic/
 
-And place it at "raw/metagenome/annotation/ghostkoala" or else simply change the path to wherever you put it.
-
-It is not mandatory to run the scripts but it would be good to have it.
-
-The path after "raw" where data is located in the arsenic folder on the scitas.
 
 ``` 
 #--From the metatranscriptome
@@ -335,6 +328,7 @@ Also, you can find more about the samples with the metadata files present inside
             └── metadata_metatranscriptome_R.csv
 ```
 
+You can also include one of the proteomic files inside /metaproteome/differential_expression to see if the expression is the same at the protein level.
 
 ```
 #--From the proteome
@@ -343,9 +337,46 @@ protein_table<-read.csv("raw/EA_DE_proteins.xlsx",header = F)
 
 ```
 
-You can also include one of the proteomic files inside /metaproteome/differential_expression to see if the expression is the same at the protein level.
+We will now format the data so it can allow us to create a Deseq2 object.
 
+```
+# Read count data and design matrix
 
+dir.create(gsub(".tsv", "", design_matrix))
+
+# Data pre-processing
+# (renaming columns, aligning count data with metadata, filtering rows based on read counts)
+featurecounts_table$protid=unlist(lapply(featurecounts_table$Geneid, function(x) { strsplit(x,'_')[[1]][2]} ))
+
+# Creating a folder with the name of the matrix
+dir.create(gsub(".tsv", "", design_matrix))
+
+# Converting the count table as a matrice
+rownames(featurecounts_table)= paste0(featurecounts_table$Chr,'_',featurecounts_table$protid)
+counts_table=data.matrix(featurecounts_table) #as.matrix(cts)
+```
+
+The following part is just to clean the name inside the featurecounts files as the path of the files is bothering us.
+
+```
+colnames(counts_table) <- sub("metatranscriptome\\.alignments\\.", "", colnames(counts_table))
+colnames(counts_table) <- sub("\\.sorted\\.bam", "", colnames(counts_table))
+
+```
+```
+head(counts_table)
+
+all(rownames(meta_data) %in% colnames(counts_table))
+counts_table <- counts_table[, rownames(meta_data)]
+all(rownames(meta_data) == colnames(counts_table))
+
+head(counts_table)
+head(meta_data)
+
+dds <- DESeqDataSetFromMatrix(countData = counts_table,
+                              colData = meta_data,
+                              design = ~ condition)
+```
 
 ## Proteomic part
 
