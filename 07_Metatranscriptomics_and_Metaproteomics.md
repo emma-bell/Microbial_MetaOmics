@@ -273,13 +273,78 @@ Optionally you can load checkm profile to find which MAs have genes differential
 Also, you can find more about the samples with the metadata files present inside the arsenic folders.
 
 ```
+/work/eml-course_bioinfo_metaomics/datasets/arsenic/
+├── metagenome
+│   ├── annotation
+│   │   ├── eggnog
+│   │   │   └── metadata_eggnog.csv
+│   │   ├── ghostkoala
+│   │   │   └── metadata_ghostkoala.tsv
+│   │   └── metaxa2
+│   │       └── metadata_metaxa2.csv
+│   ├── assemblies
+│   │   ├── kallisto
+│   │   │   └── metadata_kallisto.csv
+│   │   ├── megahit
+│   │   │   └── metadata_megahit.tsv
+│   │   ├── multiqc
+│   │   │   ├── EA_WOA
+│   │   │   │   └── multiqc_data
+│   │   │   ├── EA_WTA
+│   │   │   │   └── multiqc_data
+│   │   │   ├── TSB_WOA
+│   │   │   │   └── multiqc_data
+│   │   │   └── TSB_WTA
+│   │   │       └── multiqc_data
+│   │   └── prodigal
+│   └── binning
+│       ├── checkm
+│       │   └── metadata_checkm.csv
+│       ├── contigs2bins
+│       │   ├── EA_WOA_metawrap_bins
+│       │   ├── EA_WTA_metawrap_bins
+│       │   ├── metadata_contigs2bins.csv
+│       │   ├── TSB_WOA_metawrap_bins
+│       │   └── TSB_WTA_metawrap_bins
+│       ├── drep
+│       └── ghostkoala2bins
+│           └── metadata_ghostkoala2bins.csv
+├── metaproteome
+│   ├── differential_expression
+│   │   ├── EA
+│   │   │   └── metadata_differential_expression_EA.csv
+│   │   └── TSB
+│   │       └── metadata_differential_expression_TSB.csv
+│   └── protein_abundance
+│       └── metadata_protein_abundance.tsv
+└── metatranscriptome
+    ├── alignments
+    ├── differential_expression
+    │   ├── EA
+    │   │   └── metadata_differential_expression_EA.csv
+    │   └── TSB
+    │       └── metadata_differential_expression_TSB.csv
+    ├── featurecounts
+    ├── featurecounts_ghostkoala
+    │   └── metadata_featurescounts.csv
+    ├── matrice
+    ├── multiqc
+    └── reads
+        ├── metatranscriptome_G
+        └── metatranscriptome_R
+            └── metadata_metatranscriptome_R.csv
+```
+
+
+```
 #--From the proteome
 
-#protein_table<-read.xlsx("raw/EA_DE_proteins.xlsx",sheetIndex = 7,header = F)
+protein_table<-read.csv("raw/EA_DE_proteins.xlsx",header = F)
 
 ```
 
-You can load 
+You can also include one of the proteomic files inside /metaproteome/differential_expression to see if the expression is the same at the protein level.
+
 
 
 ## Proteomic part
