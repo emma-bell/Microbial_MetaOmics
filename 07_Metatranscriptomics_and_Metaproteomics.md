@@ -57,7 +57,7 @@ nano 07_featurecounts.sh
 
 cd /data
 
-input1="metatranscriptome/reads"
+input1="/data2/datasets/arsenic/metatranscriptome/reads"
 
 input2="/data2/datasets/arsenic/metagenome/assemblies/prodigal"
 
