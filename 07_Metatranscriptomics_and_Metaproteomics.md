@@ -61,15 +61,17 @@ input1="/data2/datasets/arsenic/metatranscriptome/reads"
 
 input2="/data2/datasets/arsenic/metagenome/assemblies/prodigal"
 
+input3="/data2/datasets/arsenic/metranscriptome/alignments"
+
 output2="featurecounts"
 
 mkdir $output2
 
 cd /data
 
-featureCounts --verbose -T $SLURM_CPUS_PER_TASK -t CDS -g ID -a $input2/EA_WTA_prodigal_genes.gff -o $output2/EA_MT_on_EA_WTA_MG_featurecounts.tsv EA*sorted*.bam
+featureCounts --verbose -T $SLURM_CPUS_PER_TASK -t CDS -g ID -a $input2/EA_WTA_prodigal_genes.gff -o $output2/EA_MT_on_EA_WTA_MG_featurecounts.tsv $input3/EA*sorted*.bam
 
-featureCounts --verbose -T $SLURM_CPUS_PER_TASK -t CDS -g ID -a $input2/TSB_WTA_prodigal_genes.gff -o $output2/TSB_MT_on_TSB_WTA_MG_featurecounts.tsv TSB*sorted*.bam
+featureCounts --verbose -T $SLURM_CPUS_PER_TASK -t CDS -g ID -a $input2/TSB_WTA_prodigal_genes.gff -o $output2/TSB_MT_on_TSB_WTA_MG_featurecounts.tsv $input3/TSB*sorted*.bam
 
 ```
 # Feature Counting Commands
