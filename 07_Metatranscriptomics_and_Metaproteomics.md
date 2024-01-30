@@ -61,7 +61,7 @@ input1="/data2/datasets/arsenic/metatranscriptome/reads"
 
 input2="/data2/datasets/arsenic/metagenome/assemblies/prodigal"
 
-input3="/data2/datasets/arsenic/metranscriptome/alignments"
+input3="/data2/datasets/arsenic/metatranscriptome/alignments"
 
 output2="featurecounts"
 
