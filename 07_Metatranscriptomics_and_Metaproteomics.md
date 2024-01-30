@@ -359,6 +359,7 @@ counts_table=data.matrix(featurecounts_table) #as.matrix(cts)
 The following part is just to clean the name inside the featurecounts files as the path of the files is bothering us.
 
 ```
+
 colnames(counts_table) <- sub("metatranscriptome\\.alignments\\.", "", colnames(counts_table))
 colnames(counts_table) <- sub("\\.sorted\\.bam", "", colnames(counts_table))
 
