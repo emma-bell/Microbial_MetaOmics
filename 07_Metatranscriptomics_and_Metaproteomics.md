@@ -71,6 +71,7 @@ featureCounts --verbose -T $SLURM_CPUS_PER_TASK -t CDS -g ID -a $input2/EA_WTA_p
 
 featureCounts --verbose -T $SLURM_CPUS_PER_TASK -t CDS -g ID -a $input2/TSB_WTA_prodigal_genes.gff -o $output2/TSB_MT_on_TSB_WTA_MG_featurecounts.tsv TSB*sorted*.bam
 
+```
 # Feature Counting Commands
 
 Here, we are using the alignments files (sorted bam files) to count the number of sample reads mapping to our predicted genes. 
