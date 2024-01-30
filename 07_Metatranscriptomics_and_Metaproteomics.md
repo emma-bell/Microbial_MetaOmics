@@ -243,8 +243,6 @@ And place it at "raw/metagenome/annotation/ghostkoala" or else simply change the
 
 It is not mandatory to run the scripts but it would be good to have it.
 
-
-
 The path after "raw" where data is located in the arsenic folder on the scitas.
 
 ``` 
@@ -258,7 +256,30 @@ featurecounts_table<-read.delim2("raw/metatranscriptome/featurecounts/EA_MT_on_E
 colnames(featurecounts_table)
 ```
 
-This part is the 
+This part is to load the featurecounts output inside R.
+
+```
+#-Checkm
+
+checkm_table<-read.csv("raw/metagenome/binning/checkm/EA_WTA_checkm_profile.csv",
+                       header=T,
+                       fileEncoding = "UTF-8-BOM")
+
+colnames(checkm_table)[9]<-"bin_size_Mbp"
+```
+
+Optionally you can load checkm profile to find which MAs have genes differentially expressed between the conditions. 
+
+Also, you can find more about the samples with the metadata files present inside the arsenic folders.
+
+```
+#--From the proteome
+
+#protein_table<-read.xlsx("raw/EA_DE_proteins.xlsx",sheetIndex = 7,header = F)
+
+```
+
+You can load 
 
 
 ## Proteomic part
