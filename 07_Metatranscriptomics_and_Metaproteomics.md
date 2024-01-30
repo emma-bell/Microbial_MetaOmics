@@ -243,7 +243,7 @@ And set it up at "raw/metagenome/annotation/ghostkoala" or else simply change th
 
 The path after "raw" where data is located in the arsenic folder on the scitas.
 
-##Proteomic part
+## Proteomic part
 
 In this dataset protein abundance has been acquired by sending the prodigal output to another laboratory specialized in high pressure liquid chromatography coupled to inductively-coupled plasma mass spectrometry.
 
