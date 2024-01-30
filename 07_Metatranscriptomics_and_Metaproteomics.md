@@ -145,7 +145,7 @@ Geneid  Chr     Start   End     Strand  Length  metatranscriptome/alignments/EA_
 Now we will use those raw counts to find which genes might be differentially expressed at RNA level using the DeSeq2 package in R.
 
 To do so, you need to copy on your laptop the featureCounts output as well as the Rscript inside: /work/eml-course_bioinfo_metaomics/scripts/deseq2.R
-You will also need the following designed matrices present in: /work/eml-course_bioinfo_metaomics/matrice
+You will also need the following designed matrices present in: /work/eml-course_bioinfo_metaomics/datasets/arsenic/metatranscriptome/matrice/
 
 Finally install the dependencies by doing:
 ```
