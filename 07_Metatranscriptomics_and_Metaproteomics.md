@@ -59,7 +59,7 @@ cd /data
 
 input1="metatranscriptome/reads"
 
-input2="metagenome/assemblies/prodigal"
+input2="/data2/datasets/arsenic/metagenome/assemblies/prodigal"
 
 output2="featurecounts"
 
