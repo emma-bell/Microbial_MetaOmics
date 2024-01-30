@@ -239,9 +239,27 @@ ghostkoala_table<-ghostkoala_table[ghostkoala_table$gene_id!="",]
 All of this part is just to load the annotation data, generated with ghostkoala. You will need to download the EA_WTA_ghostkoala.tsv present at:
 /work/eml-course_bioinfo_metaomics/datasets/arsenic/
 
-And set it up at "raw/metagenome/annotation/ghostkoala" or else simply change the path to whenever you put it.
+And place it at "raw/metagenome/annotation/ghostkoala" or else simply change the path to wherever you put it.
+
+It is not mandatory to run the scripts but it would be good to have it.
+
+
 
 The path after "raw" where data is located in the arsenic folder on the scitas.
+
+``` 
+#--From the metatranscriptome
+
+#-Featurecounts
+
+featurecounts_table<-read.delim2("raw/metatranscriptome/featurecounts/EA_MT_on_EA_WTA_MG_featurecounts.tsv",header=T,skip=1)
+#Geneid	Chr	Start	End	Strand	Length Sample_1 Sample_2 Sample_3 etc.
+
+colnames(featurecounts_table)
+```
+
+This part is the 
+
 
 ## Proteomic part
 
