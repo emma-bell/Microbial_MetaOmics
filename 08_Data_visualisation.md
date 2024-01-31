@@ -190,3 +190,37 @@ GToTree produces some iTOL-ready annotation files in **`KO_search_results/iToL_f
 For example, we can highlight our genomes in the tree by clicking on them and changing the `Label`. We can colour different clades by selecting `Coloured ranges`.
 
 Have a play around and check out the iTOL [help pages](https://itol.embl.de/help.cgi).
+
+
+## Extra GToTree
+GToTree also downloads a metadata file of the GTDB genomes: **`GTDB-SURF-10-genus-metadata.tsv`**
+If you make a copy on your laptop you can load in into R and see where closely related genomes have been found:
+
+e.g.,
+```
+SURF_meta <- read.csv("08_Visualisation/GTDB-SURF-10-genus-metadata.tsv", header = T, sep = "\t")
+```
+
+Look at the column names to see what metadata is provided:
+```
+colnames(SURF_meta)
+```
+
+To look at the isolation sources of other genomes:
+```
+SURF_meta %>% 
+  select(ncbi_country, ncbi_isolation_source) %>% 
+  distinct()
+```
+
+To look at just my species:
+```
+SURF_meta %>% filter(grepl("sp018902755", species)) %>% 
+  select(accession, ncbi_country, ncbi_isolation_source)
+```
+
+To look at multiple select species:
+```
+SURF_meta %>% filter(grepl("sp018902755|sp018896025", species)) %>% 
+  select(accession, ncbi_country, ncbi_isolation_source)
+```
