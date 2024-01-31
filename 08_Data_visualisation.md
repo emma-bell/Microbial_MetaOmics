@@ -63,7 +63,7 @@ Then activate the gtotree environment.
 ```
  micromamba activate gtotree
 ```
-You can now !
+You should now be able to run GToTree interactively.
 
 With GToTree, we can look for "SURF-10" genomes in GTDB using the following command:
 
