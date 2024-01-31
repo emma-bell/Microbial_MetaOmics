@@ -43,7 +43,7 @@ From your dataset you can choose any MAG/taxonomy you want, at any taxonomic lev
 We'll need to load an interactive session to use GToTree.
 
 ```
-srun -A bioinformatics-meta-omics2 --pty apptainer shell --bind /scratch/YOUR_USERNAME/YOUR_DATASET:/data PATH_TO_IMAGE
+srun -A bioinformatics-meta-omics1 --pty apptainer shell --bind /scratch/YOUR_USERNAME/YOUR_DATASET:/data /work/eml-course_bioinfo_metaomics/images/gtotree.sif
 ```
 
 Change into your data folder `cd /data`
