@@ -43,10 +43,23 @@ From your dataset you can choose any MAG/taxonomy you want, at any taxonomic lev
 We'll need to load an interactive session to use GToTree.
 
 ```
-srun -A bioinformatics-meta-omics1 --pty apptainer shell --bind /scratch/YOUR_USERNAME/YOUR_DATASET:/data /work/eml-course_bioinfo_metaomics/images/gtotree.sif
+srun -A bioinformatics-meta-omics1 --pty apptainer --overlay /work/eml-course_bioinfo_metaomics/gtotree_overlay shell --bind /scratch/YOUR_USERNAME/YOUR_DATASET:/data /work/eml-course_bioinfo_metaomics/images/gtotree.sif
 ```
 
 Change into your data folder `cd /data`
+
+Run this command to initiate micromamba.
+
+```
+eval "$(micromamba shell hook --shell bash)"
+```
+
+Then activate the gtotree environment.
+
+```
+ micromamba activate gtotree
+```
+You can now !
 
 With GToTree, we can look for "SURF-10" genomes in GTDB using the following command:
 
