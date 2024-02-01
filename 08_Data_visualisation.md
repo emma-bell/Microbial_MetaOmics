@@ -224,3 +224,33 @@ To look at multiple select species:
 SURF_meta %>% filter(grepl("sp018902755|sp018896025", species)) %>% 
   select(accession, ncbi_country, ncbi_isolation_source)
 ```
+
+## Extra ggplot
+If you want to filter and plot a taxa of interest from your table:
+e.g.,
+```
+Desulfobacterota <-
+MAG_rep_summary_l %>% 
+filter(phylum == "p__Desulfobacterota")
+```
+
+```
+Desulfobacterota %>%
+    ggplot(aes(x = sample, y = genome, size = abundance, fill = genus)) +
+    geom_point(shape = 21, alpha = 1) +
+    scale_size_area(max_size = 15) +
+    theme_linedraw()
+```
+
+If you want to calculate the mean abundance of a taxonomic rank, e.g., by phylum:
+```
+phylum <- MAG_rep_summary_l %>% group_by(sample,phylum) %>% mutate(mean_phylum = mean(abundance))
+```
+
+```
+phylum %>%
+    ggplot(aes(x = sample, y = phylum, size = mean_phylum, fill = phylum)) +
+    geom_point(shape = 21, alpha = 1) +
+    scale_size_area(max_size = 15) +
+    theme_linedraw()
+```
