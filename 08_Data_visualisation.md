@@ -255,7 +255,7 @@ phylum %>%
     theme_linedraw()
 ```
 
-Or filter out low abundance genomes plotting (keep relative abundance >1%):
+Or filter out low abundance genomes for plotting (e.g., keep relative abundance >1%):
 ```
 MAG_rep_summary_l %>% filter(abundance > 1)
 ```
