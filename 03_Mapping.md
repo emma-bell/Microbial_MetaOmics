@@ -11,7 +11,7 @@ for sample in $(cat samples.txt); do mkdir -p 03_Mapping/${sample}; done
 
 ### 1. Perform mapping with Strobealign
 
-This time we'll use the `for loop` to iterate through each set of paired QC reads. We'll run this command for each of our samples. Make sure you change the parts of the command that say *`your_sample`* to your sample name.
+This time we'll use the `for loop` to iterate through each set of paired QC reads.
 
 ```
 nano 03_strobealign.sh
@@ -40,7 +40,7 @@ do
 done
 ```
 
-* `strobealign ... | samtools sort -o ...` Calls the 'strobealign' command to align reads to filtered contigs, and then pipes (`|`) the output to `samtools sort` to create a sorted BAM file.
+* `strobealign ... | samtools sort -o ...` Calls the `strobealign` command to align reads to filtered contigs, and then pipes (`|`) the output to `samtools sort` to create a sorted BAM file.
 * `-t` Specifies the number of threads for parallel processing.
 * `samtools index` Creates an index for the sorted BAM file using
 
@@ -56,7 +56,6 @@ We are being liberal with 10 hours to make sure it will finish but it will likel
 ```
 
 You can check on the progress of the script by looking to see that files are being produced in **`03_Mapping/sample`**.
-
 
 When strobealign is finished, you should have a directory in **`03_Mapping/sample`** for each of your samples. In each sample directory there should be the same number of **`.bam`** (binary alignment) and **`.bam.bai`** (indexed alignment) files as you have samples. We'll need each of these files for binning.
 
@@ -107,3 +106,6 @@ scp 'username@jed.epfl.ch:/scratch/username/your_dataset/03_Mapping/your_sample/
 **Q: What proportion of your reads were mapped to your assembly? Do you consider that "good"?**
 
 You do not need to wait for this to finish before you move onto binning.
+
+**Next:** [04_Binning](04_Binning.md)
+**Previous:** [02_Assembly](02_Assembly.md)

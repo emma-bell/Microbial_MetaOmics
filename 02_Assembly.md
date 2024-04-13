@@ -176,7 +176,7 @@ for sample in $(cat samples.txt)
 do
 
 reformat.sh in=02_Assembly/your_assembly_method/${sample}/contigs.fasta \
-out=02_Assembly/filtered_contigs/${sample}_contigs.fasta minlength=500
+out=02_Assembly/filtered_contigs/${sample}_contigs.fasta minlength=1000
 
 done
 ```
@@ -228,3 +228,6 @@ Note: if you're working directory is getting full of slurm-123456789.out files, 
 rm slurm-*.out
 ```
 * The `*` is a wildcard that will select groups based on a common pattern
+
+**Next:** [03_Mapping](03_Mapping.md)
+**Previous:** [01_Read_QC](01_Read_QC.md)

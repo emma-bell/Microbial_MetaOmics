@@ -1,5 +1,5 @@
 # Read QC
-We will start by evaluating the sequence quality of the raw reads which are provided in zipped fastq files (extension .fastq.gz).
+We will start by evaluating the sequence quality of the raw reads which are provided in zipped fastq files (extension **`.fastq.gz`**).
 
 ## FastQC on raw reads
 [FastQC](https://anaconda.org/bioconda/fastqc) performs quality control checks on raw sequence data and can give a quick impression of your data before doing further analysis. We'll also use [MultiQC](https://anaconda.org/bioconda/multiqc) which summarises the FASTQC output from multiple samples.
@@ -13,8 +13,8 @@ pwd
 Make a folder for read quality control.
 ```
 mkdir -p 01_ReadQC/fastqc_pass1
-#the -p flag makes the parent directory if it does not already exist
 ```
+* the **`-p`** flag makes the parent directory if it does not already exist
 
 ### 2. Run FastQC
 We can run fastqc on each of our samples using a for loop.
@@ -51,8 +51,8 @@ You can now view the output interactively. You can look at the output for each s
 ## Quality filtering with fastp
 We'll now perform quality filtering on the reads using [fastp](https://github.com/OpenGene/fastp#adapters). This step will trim low-quality sequences using their phred score, remove adaptors, and _optionally_ remove PCR duplicates. Some of the key parameters fastp uses are outlined below.
 
-* Adapters are detected for paired end data with --detect_adapter_for_pe
-* Quality filtering is enabled. Default is phred 15 and can be adjusted with --qualified_quality_phred
+* Adapters are detected for paired end data with `--detect_adapter_for_pe`
+* Quality filtering is enabled. Default is phred 15 and can be adjusted with `--qualified_quality_phred`
 * Length filtering is enabled. Default is min length 15
 * PolyG tail trimming is enabled by default for NextSeq/NovaSeq data which is auto-detected
 * PCR duplicate removal is disabled by default 
@@ -76,7 +76,7 @@ for sample in $(cat samples.txt)
 do
 
 fastp -i 00_raw/${sample}_R1.fastq.gz -I 00_raw/${sample}_R2.fastq.gz -o 01_ReadQC/fastp_reads/${sample}_R1.fastq.gz -O 01_ReadQC/fastp_reads/${sample}_R2.fastq.gz \
---detect_adapter_for_pe --qualified_quality_phred 20 --trim_tail=1 --trim_tail2=1 \
+--detect_adapter_for_pe --qualified_quality_phred 20 --trim_tail1=1 --trim_tail2=1 \
 -h 01_ReadQC/fastp_report/${sample}.fastp.html -j 01_ReadQC/fastp_report/${sample}.fastp.json
 
 done
@@ -138,3 +138,5 @@ You can view your fastq file with the following command
 gzcat <sample_name>.fastq.gz | head -20
 #may be zcat depending on your operating system
 ```
+
+**Next:** [02_Assembly](02_Assembly.md)

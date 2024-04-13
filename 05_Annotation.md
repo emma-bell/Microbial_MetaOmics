@@ -151,3 +151,6 @@ To copy the files to your laptop (using `scp -r`) and take a look the key files 
 
 METABOLIC will take some time to run, so we can move on to the [next steps](06_Representative_MAGs.md) whilst we are waiting for it to complete.
 
+**Next:** [06_Representative_MAGs](06_Representative_MAGs.md)
+**Previous:** [04_Binning](04_Binning.md)
+

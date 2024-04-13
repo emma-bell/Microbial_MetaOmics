@@ -1,6 +1,6 @@
 # Binning
 
-Now we have our contigs (.fasta) and our alignments (.sorted.bam) we can move onto binning.
+Now we have our contigs (`.fasta`) and our alignments (`.sorted.bam`) we can move onto binning.
 We're going to use two assemblers, [CONCOCT](https://github.com/BinPro/CONCOCT) and [MetaBAT2](https://bitbucket.org/berkeleylab/metabat/src/master/).
 
 ### 1. Let's start by making the directories we'll need for the output.
@@ -33,29 +33,24 @@ for sample in $(cat samples.txt)
 
 do
 
-#First the contigs are cut up into 10000 bp
-
 cut_up_fasta.py 02_Assembly/filtered_contigs/${sample}_contigs.fa -c 10000 -o 0 --merge_last -b 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed > 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa
 
-#Then a coverage table is made using our alignments
-
-concoct_coverage_table.py 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed 03_Mapping/${sample}/*.sorted.bam --threads > 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv
-
-#Now we're ready to run CONCOCT
+concoct_coverage_table.py 04_Binning/concoct/${sample}/${sample}_contigs_10K.bed 03_Mapping/${sample}/*.sorted.bam > 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv
 
 concoct --composition_file --threads $SLURM_CPUS_PER_TASK 04_Binning/concoct/${sample}/${sample}_contigs_10K.fa --coverage_file 04_Binning/concoct/${sample}/${sample}_coverage_table.tsv -b 04_Binning/concoct/${sample}/${sample}
 
-#Merge subcontig clustering into original contig clustering
-
 merge_cutup_clustering.py 04_Binning/concoct/${sample}/${sample}_clustering_gt1000.csv > 04_Binning/concoct/${sample}/${sample}_clustering_merged.csv
-
-#Extract the bins as individual fasta
 
 mkdir 04_Binning/concoct/${sample}/bins_fasta
 extract_fasta_bins.py 02_Assembly/filtered_contigs/${sample}_contigs.fa 04_Binning/concoct/${sample}/${sample}_clustering_merged.csv --output_path 04_Binning/concoct/${sample}/bins_fasta
 
 done
 ```
+* `cut_up_fasta.py`: first the contigs are cut up into 10000 bp
+* `concoct_coverage_table.py`: then a coverage table is made using our alignments
+* `concoct`: now we're ready to run CONCOCT
+* `merge_cutup_clustering.py`: merge subcontig clustering into original contig clustering
+* `extract_fasta_bins.py`: extract the bins as individual fasta
 
 Submit the job with an sbatch script, image: `concoct.sif`, script: `04_concoct.sh`
 
@@ -87,21 +82,19 @@ for sample in $(cat samples.txt)
 
 do
 
-#First make a coverage file using our alignments
-
 jgi_summarize_bam_contig_depths --outputDepth 04_Binning/metabat/${sample}/${sample}_depth.txt 03_Mapping/${sample}/*.sorted.bam
 
-#Now we're ready to run MetaBAT
-
 metabat2 -m 1500 -i 02_Assembly/filtered_contigs/${sample}_contigs.fa -a 04_Binning/metabat/${sample}/${sample}_depth.txt -o 04_Binning/metabat/${sample}/bins_fasta/${sample}_metabat.bin
-
-#MetaBAT also has an option to summarise the bin depths
 
 aggregateBinDepths.pl 04_Binning/metabat/${sample}/${sample}_depth.txt 04_Binning/metabat/${sample}/bins_fasta/*.fa > 04_Binning/metabat/${sample}/${sample}_bindepth.txt
 
 done
 ```
-You'll need to submit this with an sbatch script calling the metabat image `metabat.sif` and your metabat script `04_metabat.sh`. You can use most of the same SBATCH parameters you used for concoct - the exception is that metabat is much quicker so you can reduce the time to 2 hours (and it will still likely be quicker than that).
+* `jgi_summarize_bam_contig_depths`: first make a coverage file using our alignments
+* `metabat2`: now we're ready to run MetaBAT
+* `aggregateBinDepths.pl`: MetaBAT also has an option to summarise the bin depths
+
+You'll need to submit this with an sbatch script calling the metabat image `metabat.sif` and your metabat script `04_metabat.sh`. You can use most of the same SBATCH parameters you used for concoct - the exception is that metabat is quicker so you can reduce the time to 2 hours (and it will still likely be quicker than that).
 
 Congratulations, you now have more bins! You can find them in the **`04_binning/metabat/${sample}/bins_fasta`** directory.
 
@@ -117,6 +110,8 @@ In your working directory make a script for renaming our concoct bins:
 This for loop will show us what the renamed files will look like, without making a change (so we can check it looks good before proceeding):
 
 ```
+#!/bin/bash
+
 for sample in $(cat samples.txt)
 
 do
@@ -125,10 +120,10 @@ do
 
         do
 
-        binid=$(echo ${bin} | cut -f5 -d "/")
-        location=$(echo ${bin} | cut -f1-4 -d "/")
+                binid=$(echo ${bin} | cut -f5 -d "/")
+                location=$(echo ${bin} | cut -f1-4 -d "/")
 
-        echo ${location}/${sample}_concoct.${binid}
+                echo ${location}/${sample}_concoct.${binid}
 
         done
 
@@ -165,6 +160,8 @@ nano 04_rename_concoct_bins.sh
 ```
 
 ```
+#!/bin/bash
+
 for sample in $(cat samples.txt)
 
 do
@@ -173,11 +170,11 @@ do
 
         do
 
-	    binid=$(echo ${bin} | cut -f5 -d "/")
-        location=$(echo ${bin} | cut -f1-4 -d "/")
+                binid=$(echo ${bin} | cut -f5 -d "/")
+                location=$(echo ${bin} | cut -f1-4 -d "/")
 
-        #this is the only line we will change
-        mv ${bin} ${location}/${sample}_concoct.${binid}
+                #this is the only line we will change
+                mv ${bin} ${location}/${sample}_concoct.${binid}
 
         done
 
@@ -213,13 +210,13 @@ for sample in $(cat samples.txt)
 
 do
 
-#Get the CONCOCT contig input file
+        #Get the CONCOCT contig input file
 
-Fasta_to_Contig2Bin.sh -e fa -i 04_Binning/concoct/${sample}/bins_fasta/ > 04_Binning/dastool/${sample}.concoct.contigs2bin.tsv
+        Fasta_to_Contig2Bin.sh -e fa -i 04_Binning/concoct/${sample}/bins_fasta/ > 04_Binning/dastool/${sample}.concoct.contigs2bin.tsv
 
-#Get the MetaBAT2 contig input file
+        #Get the MetaBAT2 contig input file
 
-Fasta_to_Contig2Bin.sh -e fa -i 04_Binning/metabat/${sample}/bins_fasta/ > 04_Binning/dastool/${sample}.metabat.contigs2bin.tsv
+        Fasta_to_Contig2Bin.sh -e fa -i 04_Binning/metabat/${sample}/bins_fasta/ > 04_Binning/dastool/${sample}.metabat.contigs2bin.tsv
 
 done
 ```
@@ -302,7 +299,7 @@ We want to know how complete our bins are and whether they contain any contamina
 
 ## CheckM2
 
-We'll use the "predict" module of CheckM2 to get the completeness and contamination of our Das Tool bins.
+We'll use the `predict` module of CheckM2 to get the completeness and contamination of our Das Tool bins.
 
 ### 4. Running CheckM2
 
@@ -330,7 +327,7 @@ checkm2 predict --database /data2/uniref100.KO.1.dmnd --threads $SLURM_CPUS_PER_
 done
 ```
 
-CheckM2 works on a directory of genome bins in FASTA format. By default, CheckM2 assumes these files end with the extension ‘fna’, so we are changing it to `fa` with the `–x` flag.
+CheckM2 works on a directory of genome bins in FASTA format. By default, CheckM2 assumes these files end with the extension `fna`, so we are changing it to `fa` with the `–x` flag.
 
 Copy paste the script at:
 
@@ -415,7 +412,7 @@ checkm lineage_wf -f 04_Binning/checkm1/${sample}/${sample}_checkm.tsv \
 
 done
 ```
-CheckM works on a directory of genome bins in FASTA format. By default, CheckM assumes these files end with the extension ‘fna’, so we are changing it to `fa` with the `–x` flag. `--tab_table` specifies we want a tab delimited table with the results and `-t 20` sets the threads. The order of the rest of the command is:
+CheckM works on a directory of genome bins in FASTA format. By default, CheckM assumes these files end with the extension `fna`, so we are changing it to `fa` with the `–x` flag. `--tab_table` specifies we want a tab delimited table with the results and `-t 20` sets the threads. The order of the rest of the command is:
 `checkm lineage_wf -f <file_to_put_results_in.tsv> <bin folder> <output folder>`
 
 CheckM takes a bit longer to run than CheckM2 so in your sbatch script you can use:
@@ -454,3 +451,6 @@ scp 'username@jed.epfl.ch:/scratch/username/your_dataset/04_binning/checkm1/*_ch
 ```
 
 **Q: Do you see any differences between the CheckM2 and CheckM results?**
+
+**Next:** [05_Annotation](05_Annotation.md)
+**Previous:** [03_Mapping](03_Mapping.md)
