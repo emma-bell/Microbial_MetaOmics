@@ -452,5 +452,5 @@ scp 'username@jed.epfl.ch:/scratch/username/your_dataset/04_binning/checkm1/*_ch
 
 **Q: Do you see any differences between the CheckM2 and CheckM results?**
 
-**Next:** [05_Annotation](05_Annotation.md)
+**Next:** [05_Annotation](05_Annotation.md)  
 **Previous:** [03_Mapping](03_Mapping.md)

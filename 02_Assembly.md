@@ -229,5 +229,5 @@ rm slurm-*.out
 ```
 * The `*` is a wildcard that will select groups based on a common pattern
 
-**Next:** [03_Mapping](03_Mapping.md)
+**Next:** [03_Mapping](03_Mapping.md)  
 **Previous:** [01_Read_QC](01_Read_QC.md)

@@ -107,5 +107,5 @@ scp 'username@jed.epfl.ch:/scratch/username/your_dataset/03_Mapping/your_sample/
 
 You do not need to wait for this to finish before you move onto binning.
 
-**Next:** [04_Binning](04_Binning.md)
+**Next:** [04_Binning](04_Binning.md)  
 **Previous:** [02_Assembly](02_Assembly.md)
